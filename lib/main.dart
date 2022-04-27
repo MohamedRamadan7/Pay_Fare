@@ -10,12 +10,13 @@ import 'package:pay_fare/shared/styles/themes.dart';
 import 'shared/network/local/cache_helper.dart';
 import 'shared/network/remote/dio_helper.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   DioHelper.init();
   await CacheHelper.init();
   runApp(MyApp());
+  //
 }
 
 class MyApp extends StatelessWidget {
@@ -25,16 +26,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AppCubit(),),
-        BlocProvider(create: (BuildContext context) => DriverCubit(),),
-        BlocProvider(create: (BuildContext context) => AdminCubit(),),
+        BlocProvider(
+          create: (BuildContext context) => AppCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => DriverCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => AdminCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme:lightTheme ,
+        theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
-        home:OnBoarding() ,
+        home: OnBoarding(),
       ),
     );
   }
