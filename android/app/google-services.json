@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "856817283357",
+    "project_id": "pay-fare-ef224",
+    "storage_bucket": "pay-fare-ef224.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856817283357:android:8bb70916b1b7276cec71f4",
+        "android_client_info": {
+          "package_name": "com.example.pay_fare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856817283357-agg89bd8qtuafq29vmq2f6k0c3nml1mv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pay_fare",
+            "certificate_hash": "a65f82ffae6470025efaf05e158bac587a15f06a"
+          }
+        },
+        {
+          "client_id": "856817283357-vmmf9o45asmms475hrni9ln55alkj0qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7k7xD1UFJu4NcEoI4GdpJZiKfRIdatYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856817283357-vmmf9o45asmms475hrni9ln55alkj0qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
