@@ -169,6 +169,7 @@ class ScanScreen extends StatelessWidget {
 
           ),
         ),
+        Text('chair ${14-index}'),
       ],
     ),
   );

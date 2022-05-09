@@ -127,7 +127,7 @@ class AppLoginScreen extends StatelessWidget {
                                   print('pass ${passwordController.text}');
 
                                 }
-                                navigateAndFinish(context,AdminLayout());
+                                navigateAndFinish(context,AppLayout());
 
                               },
                               text: 'login',

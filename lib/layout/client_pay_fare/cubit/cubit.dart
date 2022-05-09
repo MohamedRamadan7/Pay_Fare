@@ -55,8 +55,7 @@ class AppCubit extends Cubit<AppStates> {
     13: false,
   };
   void changeChair(int index) {
-
-    colorChair[index] =!colorChair[index]!;
+    colorChair[index]= !colorChair[index]!;
     //colorChair.update(index, (value) => !value);
    //CacheHelper.saveData(key: 'chair', value:colorChair[index] );
     CacheHelper.saveData(key: 'chair', value: colorChair[index]!).then((value)
