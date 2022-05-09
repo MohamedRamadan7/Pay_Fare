@@ -68,8 +68,9 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
 //     });
 //   }
 
-  late String verificationId;
+  String verificationId= '';
   PhoneAuthCredential? credential ;
+// test
 
   Future<void> submitPhoneNumber(String phoneNumber) async {
     emit(Loading());

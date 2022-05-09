@@ -91,40 +91,13 @@ class DriverNotificationsScreen extends StatelessWidget {
   Widget buildGridProducts (int index ,context) => Container(
     //color:defaultColor,
     child: Column(
+
       children: [
-        // MultiSelectDialogField(
-        //   items: _items,
-        //   title: Text("Chair"),
-        //   selectedColor: Colors.green,
-        //   decoration: BoxDecoration(
-        //     color: Colors.green.withOpacity(0.1),
-        //     borderRadius: BorderRadius.all(Radius.circular(40)),
-        //     border: Border.all(
-        //       color: Colors.green,
-        //       width: 2,
-        //     ),
-        //   ),
-        //   buttonIcon: Icon(
-        //     Icons.pets,
-        //     color: Colors.green,
-        //   ),
-        //   buttonText: Text(
-        //     "Favorite Chair",
-        //     style: TextStyle(
-        //       color: Colors.green[800],
-        //       fontSize: 16,
-        //     ),
-        //   ),
-        //   onConfirm: (results) {
-        //     //_selectedAnimals = results;
-        //   },
-        // ),
-
-
         InkWell(
           onTap: (){
             print(index);
             AppCubit.get(context).changeChair(index);
+            print(AppCubit.get(context).colorChair[index]);
 
           },
           child: Image.asset('assets/images/car.png',
@@ -134,6 +107,7 @@ class DriverNotificationsScreen extends StatelessWidget {
 
           ),
         ),
+        Text('chair ${14-index}'),
       ],
     ),
   );
