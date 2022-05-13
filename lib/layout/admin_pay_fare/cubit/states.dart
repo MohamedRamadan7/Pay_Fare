@@ -11,6 +11,7 @@ class AdminChangeChairStaState extends AdminStates{}
 class AdminSuccessChangeChairStaState extends AdminStates{}
 
 class AdminErrorChangeChairState extends AdminStates{}
+class onChangedDropdownMenuState extends AdminStates{}
 
 
 

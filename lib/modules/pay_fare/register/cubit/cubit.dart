@@ -6,7 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/models/app.dart';
+import 'package:pay_fare/models/client_model/register_model.dart';
 import 'package:pay_fare/modules/pay_fare/register/cubit/states.dart';
+import 'package:pay_fare/shared/network/end_points.dart';
+import 'package:pay_fare/shared/network/remote/dio_helper.dart';
 
 
 class AppRegisterCubit extends Cubit<AppRegisterStates>
@@ -40,33 +43,37 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
 //
 //     });
 //   }
-//   void userCreate({
-//     required String email,
-//     required String name,
-//     required String phone,
-//     required String uId,
-//   })
-//   {
-//     AppUserModel model =AppUserModel(
-//       name:name,
-//       email:email ,
-//       phone:phone ,
-//       uId: uId,
-//     );
-//
-//     FirebaseFirestore.instance
-//         .collection('users')
-//         .doc(uId)
-//         .set(model.toMap())
-//         .then((value) {
-//           print ('user is : ${uId}');
-//           emit(AppCreateUserSuccessState());
-//
-//     }).catchError((error) {
-//       print ('error is : ${error.toString()}');
-//       emit(AppCreateUserErrorState(error.toString()));
-//     });
-//   }
+
+  ClientRegisterModel? registerModel;
+  void userRegister({
+    required String name,
+    required String username,
+    required String phone,
+    required String password,
+  })
+  {
+    emit(AppRegisterLoadingState());
+
+    DioHelper.postData(url: REGISTER,
+        data:{
+            'user':{
+              'name':name,
+              'userName':username,
+              'phone':phone,
+              'password':password,
+            }
+        }
+    ).then((value){
+      print(value.data);
+      registerModel = ClientRegisterModel.fromJson(value.data);
+
+      emit(AppRegisterSuccessState(registerModel!));
+    }).catchError((error){
+
+      emit(AppRegisterErrorState(error.toString()));
+      print('error is = ${error.toString()}');
+    });
+  }
 
   String verificationId= '';
   PhoneAuthCredential? credential ;

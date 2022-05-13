@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/admin_pay_fare/cubit/states.dart';
+import 'package:pay_fare/models/station_model.dart';
 import 'package:pay_fare/modules/admin_pay_fare/Arranging/admin_Arranging_screen.dart';
 import 'package:pay_fare/modules/admin_pay_fare/add_driver/add_driver_screen.dart';
 import 'package:pay_fare/modules/admin_pay_fare/home/admin_home_screen.dart';
 import 'package:pay_fare/modules/admin_pay_fare/reports/admin_reports_screen.dart';
 import 'package:pay_fare/modules/admin_pay_fare/ticket_price/ticket_price_screen.dart';
 import 'package:pay_fare/shared/network/local/cache_helper.dart';
+import 'package:pay_fare/shared/network/remote/dio_helper.dart';
 
 class AdminCubit extends Cubit<AdminStates> {
   AdminCubit() : super(AdminInitialState());
@@ -39,34 +41,38 @@ class AdminCubit extends Cubit<AdminStates> {
     currentIndex = index;
     emit(AdminChangeBottomNaveState());
   }
+   List <String> station = [ 'الموقف الجديد','عبود','رمسيس','الاتوبيس الجديد'];
 
-  late Map<int, bool> colorChair = {
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false,
-    9: false,
-    10: false,
-    11: false,
-    12: false,
-    13: false,
-  };
-  void changeChair(int index) {
+  final from = [ 'Mans','Alex','Cairo','Giza'];
+  final to = [ 'Mans','Alex','Cairo','Giza'];
+  String? valueStation;
+  String? valueFrom;
+  String? valueTo;
+  String? valueOwner;
+ final  owner=[
+    'Mohamed Ramadan','Mohamed 3bid','Mohamed AbdElStar', 'Khaled Awad','Zaynb yousef',
+  ];
 
-    colorChair[index] =!colorChair[index]!;
-    //colorChair.update(index, (value) => !value);
-   //CacheHelper.saveData(key: 'chair', value:colorChair[index] );
-    CacheHelper.saveData(key: 'chair', value: colorChair[index]!).then((value)
-    {
-      emit(AdminChangeChairStaState());
-    });
 
+   void onChangedDropdownMenuFrom(value)
+   {
+     valueFrom=value;
+     emit(onChangedDropdownMenuState());
+   }
+  void onChangedDropdownMenuTo(value)
+  {
+    valueTo=value;
+    emit(onChangedDropdownMenuState());
+  }
+  void onChangedDropdownMenuStation(value)
+  {
+    valueStation=value;
+    emit(onChangedDropdownMenuState());
   }
 
-
+  void onChangedDropdownMenuOwner(value)
+  {
+    valueOwner=value;
+    emit(onChangedDropdownMenuState());
+  }
 }
