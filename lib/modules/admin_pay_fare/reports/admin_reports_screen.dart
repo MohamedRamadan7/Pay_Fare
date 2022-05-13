@@ -19,11 +19,11 @@ class AdminReportsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Driver name',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold
-                ),),
+                // Text('Driver name',
+                // style: TextStyle(
+                //   fontSize: 20.0,
+                //   fontWeight: FontWeight.bold
+                // ),),
                 SizedBox(
                   height: 20.0,
                 ),

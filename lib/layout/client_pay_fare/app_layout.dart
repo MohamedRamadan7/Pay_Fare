@@ -11,7 +11,6 @@ class AppLayout extends StatelessWidget {
     return BlocConsumer<AppCubit,AppStates>(
       listener: (context , state){},
       builder: (context , state){
-
         var cubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(

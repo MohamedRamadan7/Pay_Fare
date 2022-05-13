@@ -4,7 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pay_fare/models/client_model/client_login_model.dart';
 import 'package:pay_fare/modules/pay_fare/login/cubit/states.dart';
+import 'package:pay_fare/shared/network/end_points.dart';
+import 'package:pay_fare/shared/network/remote/dio_helper.dart';
 
 
 class AppLoginCubit extends Cubit<AppLoginStates>
@@ -12,6 +15,7 @@ class AppLoginCubit extends Cubit<AppLoginStates>
   AppLoginCubit() : super(AppLoginInitialState());
   static AppLoginCubit get(context)=> BlocProvider.of(context);
 
+  ClientLoginModel? loginModel;
 
   void userLogin({
   required String phone,
@@ -19,6 +23,21 @@ class AppLoginCubit extends Cubit<AppLoginStates>
 })
   {
     emit(AppLoginLoadingState());
+    DioHelper.postData(url: LOGIN,
+        data:{
+          'phone':phone,
+          'password':password,
+        }
+    ).then((value) {
+      print(value.data);
+      loginModel = ClientLoginModel.fromJson(value.data);
+      print('data is : ${loginModel!.user!.type!.name}');
+      emit(AppLoginSuccessState(loginModel!));
+    }
+    ).catchError((error){
+      emit(AppLoginErrorState(error.toString()));
+      print('errorrrrrrrrrrrrrrrrrrr');
+    });
 
     // FirebaseAuth.instance.signInWithEmailAndPassword(
     //     email: phone,

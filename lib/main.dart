@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/admin_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/cubit.dart';
+import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/layout/driver_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/modules/pay_fare/onboarding/on_boarding.dart';
+import 'package:pay_fare/shared/components/constants.dart';
 import 'package:pay_fare/shared/styles/themes.dart';
 
 import 'shared/network/local/cache_helper.dart';
@@ -15,6 +17,7 @@ void main() async {
   await Firebase.initializeApp();
   DioHelper.init();
   await CacheHelper.init();
+   //clientId = CacheHelper.getData(key: 'clientId');
   runApp(MyApp());
   //
 }
@@ -36,13 +39,24 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => AdminCubit(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        home: OnBoarding(),
-      ),
+      child: BlocConsumer<AppCubit, AppStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (CacheHelper.getData(key: 'balanceClient') != null) {
+              AppCubit.get(context).balance =
+                  CacheHelper.getData(key: 'balanceClient');
+            } else {
+              CacheHelper.saveData(key: 'balanceClient', value: 1000.0);
+            }
+            //clientId = CacheHelper.getData(key: 'clientId');
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: ThemeMode.light,
+              home: OnBoarding(),
+            );
+          }),
     );
   }
 }

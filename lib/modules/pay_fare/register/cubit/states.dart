@@ -1,22 +1,22 @@
+import 'package:pay_fare/models/client_model/register_model.dart';
 
 abstract class AppRegisterStates {}
 
-class AppRegisterInitialState extends AppRegisterStates{}
+class AppRegisterInitialState extends AppRegisterStates {}
 
-class AppRegisterLoadingState extends AppRegisterStates{}
+class AppRegisterLoadingState extends AppRegisterStates {}
 
-class AppRegisterSuccessState extends AppRegisterStates{}
+class AppRegisterSuccessState extends AppRegisterStates {
+  final ClientRegisterModel registerModel;
 
-class AppRegisterErrorState extends AppRegisterStates{
+  AppRegisterSuccessState(this.registerModel);
+}
+
+class AppRegisterErrorState extends AppRegisterStates {
   final String error;
   AppRegisterErrorState(this.error);
 }
-class AppCreateUserSuccessState extends AppRegisterStates{}
 
-class AppCreateUserErrorState extends AppRegisterStates{
-  final String error;
-  AppCreateUserErrorState(this.error);
-}
 class Loading extends AppRegisterStates {}
 
 class ErrorOccurred extends AppRegisterStates {
@@ -25,8 +25,8 @@ class ErrorOccurred extends AppRegisterStates {
   ErrorOccurred({required this.errorMsg});
 }
 
-class PhoneNumberSubmited extends AppRegisterStates{}
+class PhoneNumberSubmited extends AppRegisterStates {}
 
-class PhoneOTPVerified extends AppRegisterStates{}
+class PhoneOTPVerified extends AppRegisterStates {}
 
-class AppChangeRegisterPasswordVisibilityState extends AppRegisterStates{}
+class AppChangeRegisterPasswordVisibilityState extends AppRegisterStates {}
