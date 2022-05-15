@@ -123,12 +123,12 @@ class AdminAddDriverScreen extends StatelessWidget {
                         child: ButtonTheme(
                           alignedDropdown: true,
                           child: DropdownButton<String>(
-                            // onTap: (){
-                            //   DioHelper.getData(url: 'station').then((value) {
-                            //     stationModel st =stationModel.fromJson(value.data[0]);
-                            //     print(st.name);
-                            //   });
-                            // },
+                            onTap: (){
+                              DioHelper.getData(url: 'station').then((value) {
+                                StationModel st =StationModel.fromJson(value.data[0]);
+                                print(st.name);
+                              });
+                            },
                               isExpanded: true,
                               hint: Text('Station'),
                               iconSize: 36,

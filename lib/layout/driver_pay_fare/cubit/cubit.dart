@@ -1,11 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/driver_pay_fare/cubit/states.dart';
+import 'package:pay_fare/models/driver_model/get_driver_model.dart';
 import 'package:pay_fare/modules/driver_pay_fare/archive/driver_archive_screen.dart';
 import 'package:pay_fare/modules/driver_pay_fare/home/driver_home_screen.dart';
 import 'package:pay_fare/modules/driver_pay_fare/notifications/notification_screen.dart';
 import 'package:pay_fare/modules/driver_pay_fare/wallet/driver_walet_screen.dart';
+import 'package:pay_fare/shared/components/constants.dart';
+import 'package:pay_fare/shared/network/end_points.dart';
+import 'package:pay_fare/shared/network/local/cache_helper.dart';
+import 'package:pay_fare/shared/network/remote/dio_helper.dart';
 
 class DriverCubit extends Cubit<DriverStates> {
   DriverCubit() : super(DriverInitialState());
@@ -20,8 +24,7 @@ class DriverCubit extends Cubit<DriverStates> {
     DriverArchiveScreen(),
   ];
 
-  List<String> titles=
-  [
+  List<String> titles = [
     'Home',
     'Notifications',
     'Wallet',
@@ -56,15 +59,27 @@ class DriverCubit extends Cubit<DriverStates> {
     emit(DriverChangeChairStaState());
   }
 
-  IconData icon= Icons.toggle_off;
-  bool Active=true;
+  IconData icon = Icons.toggle_off;
+  bool Active = true;
 
-  void ChangeActiveVisibility()
-  {
-    Active= !Active;
-    icon= Active? Icons.toggle_off :Icons.toggle_on;
+  void ChangeActiveVisibility() {
+    Active = !Active;
+    icon = Active ? Icons.toggle_off : Icons.toggle_on;
     emit(DriverChangeActiveVisibilityState());
   }
 
-
+  GetDriverModel? driverModel;
+  void getDriverData()  {
+    //emit(AppLoadingGrtDataState());
+     DioHelper.getData(url: GETDRIVER, query: {
+      'phone': '${DriverPhone}',
+    }).then((value) {
+      driverModel = GetDriverModel.fromJson(value.data);
+      print('data driver : ${driverModel!.user!.name}');
+      emit(DriverSuccessDriverDataState(driverModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(DriverErrorDriverDataState());
+    });
+  }
 }

@@ -29,7 +29,7 @@ class AppLoginCubit extends Cubit<AppLoginStates>
           'password':password,
         }
     ).then((value) {
-      print(value.data);
+     // print(value.data);
       loginModel = ClientLoginModel.fromJson(value.data);
       print('data is : ${loginModel!.user!.type!.name}');
       emit(AppLoginSuccessState(loginModel!));

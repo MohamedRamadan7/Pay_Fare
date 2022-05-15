@@ -42,16 +42,14 @@ class ScanScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Container(
-                          child: Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                'car id is :  ${AppCubit.get(context).qrstr}',
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              'car id is :  ${AppCubit.get(context).qrstr}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: TextStyle(
+                                fontSize: 20.0,
                               ),
                             ),
                           ),

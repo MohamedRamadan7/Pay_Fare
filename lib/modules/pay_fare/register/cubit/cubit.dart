@@ -9,6 +9,7 @@ import 'package:pay_fare/models/app.dart';
 import 'package:pay_fare/models/client_model/register_model.dart';
 import 'package:pay_fare/modules/pay_fare/register/cubit/states.dart';
 import 'package:pay_fare/shared/network/end_points.dart';
+import 'package:pay_fare/shared/network/local/cache_helper.dart';
 import 'package:pay_fare/shared/network/remote/dio_helper.dart';
 
 
@@ -84,7 +85,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
 
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber',
-      timeout: const Duration(seconds: 40),
+      timeout: const Duration(seconds: 120),
       verificationCompleted: verificationCompleted,
       verificationFailed: verificationFailed,
       codeSent: codeSent,
@@ -108,6 +109,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
 
   void codeSent(String verificationId, int? resendToken) async{
     print('codeSent');
+    CacheHelper.saveData(key: 'verificationId', value: verificationId);
     this.verificationId = await verificationId;
     print(this.verificationId);
 
@@ -120,7 +122,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
 
   Future<void> submitOTP(String otpCode) async {
     credential = PhoneAuthProvider.credential(
-        verificationId: this.verificationId,
+        verificationId: '${CacheHelper.getData(key: 'verificationId')}',
         smsCode: otpCode);
     print("sms code is : ${credential!.smsCode}");
     print('verificationId is :${credential!.verificationId}');

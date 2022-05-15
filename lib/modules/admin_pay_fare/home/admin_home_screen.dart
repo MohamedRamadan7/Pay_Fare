@@ -10,6 +10,7 @@ class AdminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var numberDrivers =10;
     return BlocConsumer<AdminCubit,AdminStates>(
       listener: (context, state){},
       builder: (context, state){
@@ -29,14 +30,29 @@ class AdminHomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.0,
                   ),
-                  ListView.separated(
+                  numberDrivers> 0? ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => buildActiveDriver(),
                       separatorBuilder: (context, index) =>SizedBox(
                         height: 20,
                       ),
-                      itemCount: 10),
+                      itemCount: numberDrivers):Center(
+                         child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.menu,
+                                size: 80.0,
+                                color: Colors.grey,),
+                              Text(' No Drivers in the Station ',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                  ),
+                       ),
                 ],
               ),
             ),

@@ -17,23 +17,25 @@ void main() async {
   await Firebase.initializeApp();
   DioHelper.init();
   await CacheHelper.init();
-   //clientId = CacheHelper.getData(key: 'clientId');
+ clientId = CacheHelper.getData(key: 'clientId');
+ DriverPhone = CacheHelper.getData(key: 'driverPhone');
+
+
   runApp(MyApp());
   //
 }
 
 class MyApp extends StatelessWidget {
   //const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppCubit(),
+          create: (BuildContext context) => AppCubit()..getUserData(),
         ),
         BlocProvider(
-          create: (BuildContext context) => DriverCubit(),
+          create: (BuildContext context) => DriverCubit()..getDriverData(),
         ),
         BlocProvider(
           create: (BuildContext context) => AdminCubit(),
