@@ -94,65 +94,71 @@ class HomeScreen extends StatelessWidget {
                       //     borderRadius: BorderRadius.circular(20.0,),
                       //   ),
                       // ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(width: 130,),
-                              Text('welcome',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold
-                                ),),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Divider(thickness: 2,indent: 60,endIndent: 60,),
-
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 25.0,
-                            backgroundImage: NetworkImage(
-                                'https://play-lh.googleusercontent.com/O6bNpvDPClvYntJEOxbM7w-UNtoJf0Xcj6JyY2zJZOYlkSd8F3AufC20SJXKUncqGxk=s200'),
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('${cubit.userModel!.user!.name}',
-                                style: TextStyle(
+                      // Column(
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         SizedBox(width: 130,),
+                      //         Text('welcome',
+                      //           style: TextStyle(
+                      //               fontSize: 25,
+                      //               fontWeight: FontWeight.bold
+                      //           ),),
+                      //       ],
+                      //     ),
+                      //     SizedBox(
+                      //       height: 10,
+                      //     ),
+                      //     Divider(thickness: 2,indent: 60,endIndent: 60,),
+                      //
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: 0,
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(top:10.0),
+                        child: Row(
+                          children: [
+                           // ==============================image
+                            CircleAvatar(
+                              radius: 25.0,
+                              backgroundImage: NetworkImage(
+                                  'https://play-lh.googleusercontent.com/O6bNpvDPClvYntJEOxbM7w-UNtoJf0Xcj6JyY2zJZOYlkSd8F3AufC20SJXKUncqGxk=s200'),
+                            ),
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                               //======================name
+                                Text('${cubit.userModel!.user!.name}',
+                                  style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                               //=====================phone
+                                Text('${cubit.userModel!.user!.phone}',
+                                  style: TextStyle(
                                     fontSize: 18.0,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600
-                                ),
-                              ),
-                              Text('${cubit.userModel!.user!.phone}',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  color: Colors.grey,
+                                    color: Colors.grey,
 
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: SizedBox(),
-                          ),
-                          Icon(
-                            Icons.short_text,
-                            color: Theme.of(context).iconTheme.color,
-                          )
-                        ],
+                              ],
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                            Icon(
+                              Icons.short_text,
+                              color: Theme.of(context).iconTheme.color,
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height:30.0 ,),
@@ -292,7 +298,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 350,
                                 child: MaterialButton(
                                   onPressed: (){
-
+                                  //  AppCubit.get(context).getChairData();
                                   },
                                   child: Text('Sow more',
                                     style: TextStyle(

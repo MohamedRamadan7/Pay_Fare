@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
+import 'package:pay_fare/modules/pay_fare/scan/ListViewPage.dart';
 import 'package:pay_fare/modules/pay_fare/wallet/balance_card.dart';
+import 'package:pay_fare/modules/pay_fare/wallet/request_credit.dart';
+import 'package:pay_fare/modules/pay_fare/wallet/send_credit.dart';
+import 'package:pay_fare/modules/pay_fare/wallet/wallet_balance.dart';
 import 'package:pay_fare/shared/components/components.dart';
 import 'package:pay_fare/shared/styles/colors.dart';
 
@@ -80,11 +84,12 @@ class WalletScreen extends StatelessWidget {
                             fontSize: 17,
                             function: ()
                             {
-                              //  navigateTo(context, widget);
+                              navigateTo(context,SendCreditScreen());
                             },
-                            text: 'Balance trans',
+                            text: 'Send Credit',
                             isUberCase: false,
                             radius: 30,
+                            background: LightColor.navyBlue1
                           ),
                           Spacer(),
                           defaultButton(
@@ -92,11 +97,13 @@ class WalletScreen extends StatelessWidget {
                             width: 150,
                             function: ()
                             {
-                              //  navigateTo(context, widget);
+
+                              navigateTo(context, RequestCreditScreen());
                             },
-                            text: 'Credit request',
+                            text: 'Request Credit ',
                             isUberCase: false,
                             radius: 30,
+                            background: LightColor.navyBlue1
                           ),
                         ],
                       ),
@@ -118,7 +125,7 @@ class WalletScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -129,7 +136,8 @@ class WalletScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(5.0),
                               child: Row(
                                 children: [
-                                  Icon(Icons.credit_card),
+                                  Icon(Icons.credit_card,
+                                  color: Colors.white,),
                                   SizedBox(
                                     width: 5.0,
                                   ),
@@ -138,7 +146,7 @@ class WalletScreen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
@@ -155,7 +163,7 @@ class WalletScreen extends StatelessWidget {
                                 width: 150,
                                 function: ()
                                 {
-                                  //  navigateTo(context, widget);
+                                    navigateTo(context,WalletBalanceScreen());
                                 },
                                 text: 'Add Credit',
                                 isUberCase: false,
@@ -167,7 +175,7 @@ class WalletScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         // border: Border.all(color: defaultColor,
                         //     width: 10),
-                        color: defaultColor,
+                        color:LightColor.navyBlue1,
                         borderRadius: BorderRadius.circular(20.0,),
                       ),
                     ),

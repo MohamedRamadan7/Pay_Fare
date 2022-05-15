@@ -1,9 +1,10 @@
+import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/client_model/client_login_model.dart';
 
 abstract class AppStates {}
 
 class AppInitialState extends AppStates {}
-
+class AppLoadingGrtDataState extends AppStates {}
 class AppChangeBottomNaveState extends AppStates {}
 
 class AppChangeChairStaState extends AppStates {}
@@ -22,3 +23,10 @@ class AppSuccessUserDataState extends AppStates {
 }
 
 class AppErrorUserDataState extends AppStates {}
+
+class AppSuccessChairDataState extends AppStates {
+  final GetChair chairModel;
+  AppSuccessChairDataState(this.chairModel);
+}
+
+class AppErrorChairDataState extends AppStates {}

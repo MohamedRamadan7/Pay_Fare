@@ -32,7 +32,8 @@ class AppRegisterScreen extends StatelessWidget {
               print(state.registerModel.user!.name);
               print(state.registerModel.user!.phone);
               // CacheHelper.saveData(key: 'token', value: state.loginModel.id).then((value) {
-              navigateAndFinish(context, AppLayout());
+              //navigateTo(context, OtpScreen(phoneNumber: phoneController.text));
+              //navigateAndFinish(context, AppLayout());
               // });
             } else {
               print(state.registerModel.user!.id);
@@ -160,10 +161,13 @@ class AppRegisterScreen extends StatelessWidget {
                           state is! AppRegisterLoadingState
                               ? defaultButton(
                                   function: () async {
-                                    // await  AppRegisterCubit.get(context).submitPhoneNumber(phoneController.text);
-                                    //   navigateTo(context, OtpScreen(phoneNumber: phoneController.text));
+                                     // await  AppRegisterCubit.get(context).submitPhoneNumber(phoneController.text);
+                                     // navigateTo(context, OtpScreen(phoneNumber: phoneController.text));
 
                                     if (formkey.currentState!.validate()) {
+                                      await  AppRegisterCubit.get(context).submitPhoneNumber(phoneController.text);
+                                      navigateTo(context, OtpScreen(phoneNumber: phoneController.text));
+
                                       AppRegisterCubit.get(context).userRegister(
                                         name: nameController.text,
                                         username: phoneController.text,

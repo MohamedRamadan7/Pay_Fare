@@ -31,13 +31,21 @@ class AppLoginScreen extends StatelessWidget {
                 navigateAndFinish(context, AppLayout());
               });
             } else if (state.loginModel.user!.type!.id == 2) {
-              navigateAndFinish(context, DriverLayout());
+              //print(state.loginModel.user!.name);
+              //  print(state.loginModel.user!.phone);
+               CacheHelper.saveData(key: 'driverPhone', value: state.loginModel.user!.phone).then((value) {
+                 DriverPhone = CacheHelper.getData(key: 'driverPhone');
+                     navigateAndFinish(context, DriverLayout());
+
+                });
             } else if (state.loginModel.user!.type!.id == 1) {
               navigateAndFinish(context, AdminLayout());
             } else {
               print(state.loginModel.user!.id);
               showToast(text: "error", state: ToastStates.ERROR);
             }
+          } else if (state is AppLoginErrorState) {
+            showToast(text: "error", state: ToastStates.ERROR);
           }
         },
         builder: (context, state) {
@@ -111,11 +119,11 @@ class AppLoginScreen extends StatelessWidget {
                               },
                               onsumit: (value) {
                                 if (formkey.currentState!.validate()) {
-                                  // AppLoginCubit.get(context).userLogin(
-                                  //     email: emailController.text,
-                                  //     password: passwordController.text);
-                                  // print('email ${emailController.text}');
-                                  // print('pass ${passwordController.text}');
+                                  AppLoginCubit.get(context).userLogin(
+                                      phone: phoneController.text,
+                                      password: passwordController.text);
+                                  print('phone ${phoneController.text}');
+                                  print('password ${passwordController.text}');
                                 }
                               }),
                           SizedBox(
@@ -124,23 +132,14 @@ class AppLoginScreen extends StatelessWidget {
                           state is! AppLoginLoadingState
                               ? defaultButton(
                                   function: () {
-                                    // DioHelper.getData(
-                                    //     url: 'user/get-by-id',
-                                    //     query: {
-                                    //       'id': 14,
-                                    //     }).then((value) => print(value.data));
-                                    //
-                                    // DioHelper.postData(url: 'user/login', data: {
-                                    //   "phone":"01554986745",
-                                    //   "password":"12345678"
-                                    // }).then((value) => print(value.data));
                                     if (formkey.currentState!.validate()) {
                                       AppLoginCubit.get(context).userLogin(
                                           phone: phoneController.text,
                                           password: passwordController.text);
                                       print('phone ${phoneController.text}');
-                                      print(
-                                          'password ${passwordController.text}');
+                                      print('password ${passwordController.text}');
+
+
                                     }
                                     // navigateAndFinish(context,AdminLayout());
                                   },

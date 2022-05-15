@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
+import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/client_model/client_login_model.dart';
 import 'package:pay_fare/modules/pay_fare/help/help_screen.dart';
 import 'package:pay_fare/modules/pay_fare/home/home_screen.dart';
@@ -84,15 +85,37 @@ class AppCubit extends Cubit<AppStates> {
 
   ClientLoginModel? userModel;
   void getUserData() {
+    //emit(AppLoadingGrtDataState());
     DioHelper.getData(url: PROFILE, query: {
-      'id': CacheHelper.getData(key: 'clientId'),
+      'id':'${clientId}',
     }).then((value) {
       userModel = ClientLoginModel.fromJson(value.data);
-      //print(userModel!.user!.phone);
+      print(userModel!.user!.phone);
       emit(AppSuccessUserDataState(userModel!));
     }).catchError((error) {
       print(error.toString());
       emit(AppErrorUserDataState());
     });
   }
+
+  GetChair? chairModel;
+  void getChairData() {
+    DioHelper.getData(url: GETCHAIR, query: {
+      'id':'8',
+    }).then((value) {
+      chairModel = GetChair.fromJson(value.data);
+      print(chairModel!.chairNumber);
+      print(chairModel!.status);
+      emit(AppSuccessChairDataState(chairModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorChairDataState());
+    });
+  }
+
+
 }
+
+
+
+

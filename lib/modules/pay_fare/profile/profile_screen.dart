@@ -4,6 +4,7 @@ import 'package:pay_fare/layout/client_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/modules/pay_fare/login/app_login_screen.dart';
 import 'package:pay_fare/shared/components/components.dart';
+import 'package:pay_fare/shared/components/constants.dart';
 
 class ProfileScreen extends StatelessWidget {
 
@@ -225,7 +226,7 @@ class ProfileScreen extends StatelessWidget {
                       TextButton(
                         onPressed: ()
                         {
-                          navigateAndFinish(context, AppLoginScreen());
+                          signOut(context);
                         },
                         child: Text(
                           'LogOut',
