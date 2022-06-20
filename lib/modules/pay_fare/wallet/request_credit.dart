@@ -62,6 +62,7 @@ class RequestCreditScreen extends StatelessWidget {
                       navigateTo(context,ListViewPage(amountToPay: double.parse(numberController.text)));
                     },
                     text: 'Next')
+//
               ],
             ),
           ),
