@@ -23,6 +23,7 @@ class AppLayout extends StatelessWidget {
             onTap:(index)
             {
               cubit.changeBottomNave(index);
+              AppCubit.get(context).getUserData();
             },
             items: [
               BottomNavigationBarItem(

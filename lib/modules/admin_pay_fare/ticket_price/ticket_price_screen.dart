@@ -9,7 +9,26 @@ class AdminTicketPriceScreen extends StatelessWidget {
   var fromController = TextEditingController();
   var toController = TextEditingController();
   var costController = TextEditingController();
-
+List pricies = [
+  {
+    "cityfrom":"mansoura",
+    "cityto":"cairo",
+  "price":10,
+  },
+  {
+    "cityfrom":"12",
+    "cityto":"23",
+    "price":22,
+  },{
+    "cityfrom":"23",
+    "cityto":"24",
+    "price":33,
+  },{
+    "cityfrom":"mansoura",
+    "cityto":"cairo",
+    "price":44,
+  },
+];
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AdminCubit,AdminStates>(
@@ -98,11 +117,12 @@ class AdminTicketPriceScreen extends StatelessWidget {
                         ListView.separated(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => buildPrice(),
+                            itemBuilder: (context, index) => buildPrice(index),
                             separatorBuilder: (context, index) =>SizedBox(
                               height: 20,
                             ),
-                            itemCount: 10),
+                            itemCount: pricies.length,
+                        ),
                       ],
                     ),
                     // Padding(
@@ -584,7 +604,7 @@ class AdminTicketPriceScreen extends StatelessWidget {
     }
     );
   }
-  Widget buildPrice() => Padding(
+  Widget buildPrice(int index) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 10.0),
     child: Row(
 
@@ -603,7 +623,7 @@ class AdminTicketPriceScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
 
-                      child: Text('Mansoura',
+                      child: Text(pricies[index]["cityfrom"],
                         style: TextStyle(
                           fontSize: 16,
 
@@ -615,7 +635,7 @@ class AdminTicketPriceScreen extends StatelessWidget {
                     child: Container(
 
                       child: Center(
-                        child: Text('Cairo',
+                        child: Text(pricies[index]["cityto"],
                           style: TextStyle(
                             fontSize: 16,
 
@@ -627,7 +647,7 @@ class AdminTicketPriceScreen extends StatelessWidget {
                     child: Container(
 
                       child: Center(
-                        child: Text('50',
+                        child: Text(pricies[index]["price"].toString(),
                           style: TextStyle(
                             fontSize: 16,
 
@@ -646,7 +666,11 @@ class AdminTicketPriceScreen extends StatelessWidget {
           width: 5,
         ),
         OutlinedButton(
-          onPressed: (){},
+          onPressed: (){
+            print("hiii");
+
+            pricies[index]["price"]=50;
+          },
           child: Container(
             height: 40,
             child: Icon(

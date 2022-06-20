@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/client_model/client_login_model.dart';
+import 'package:pay_fare/models/client_model/client_send_balance_model.dart';
+import 'package:pay_fare/models/client_model/client_wallet_model.dart';
 import 'package:pay_fare/modules/pay_fare/help/help_screen.dart';
 import 'package:pay_fare/modules/pay_fare/home/home_screen.dart';
 import 'package:pay_fare/modules/pay_fare/profile/profile_screen.dart';
@@ -21,7 +23,7 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   var currentIndex = 0;
-  double balance = 10000.0;
+  late double balance ;
   List<Widget> bottomScreen = [
     HomeScreen(),
     ScanScreen(),
@@ -98,12 +100,61 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  ClientWalletModel? walletModel;
+  void putWalletData({
+    required int id,
+    required double funds,
+  })
+  {
+    //emit(AppLoadingGrtDataState());
+    DioHelper.putData(url:ADDWALLET, data: {
+      'id':id,
+      'amount':funds,
+    }
+     ).then((value) {
+       walletModel = ClientWalletModel.fromJson(value.data);
+       print(value.data);
+      emit(AppSuccessWalletDataState());
+    }).catchError((error) {
+       print(error.toString());
+      emit(AppErrorWalletDataState());
+     });
+  }
+
+  ClientSendBalanceModel? sendBalanceModel;
+
+  void putSendBalanceData({
+    required int id,
+    required String phone,
+    required double amount,
+  })
+  {
+    //emit(AppLoadingGrtDataState());
+    DioHelper.putData(url:SENDAMOUNT,query: {
+      'id':id,
+      'phone':phone,
+      'amount':amount,
+
+    }
+    ).then((value) {
+      sendBalanceModel = ClientSendBalanceModel.fromJson(value.data);
+      print(value.data);
+      emit(AppSuccessSendBalanceState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorSendBalanceState());
+    });
+  }
+
+
   GetChair? chairModel;
   void getChairData() {
     DioHelper.getData(url: GETCHAIR, query: {
       'id':'8',
     }).then((value) {
       chairModel = GetChair.fromJson(value.data);
+      //List<Map<String, dynamic>> map =value.data;
+      // print(map);
       print(chairModel!.chairNumber);
       print(chairModel!.status);
       emit(AppSuccessChairDataState(chairModel!));
