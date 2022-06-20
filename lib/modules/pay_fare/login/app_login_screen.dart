@@ -141,7 +141,7 @@ class AppLoginScreen extends StatelessWidget {
 
 
                                     }
-                                    // navigateAndFinish(context,AdminLayout());
+                                     navigateAndFinish(context,AdminLayout());
                                   },
                                   text: 'login',
                                   isUberCase: true)

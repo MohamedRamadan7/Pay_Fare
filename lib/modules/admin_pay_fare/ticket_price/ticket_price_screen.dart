@@ -76,496 +76,506 @@ class AdminTicketPriceScreen extends StatelessWidget {
                           Expanded(
                             child: Column(
                               children: [
-                                Center(
-                                  child: Text(
-                                    'Cost',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600
-                                    ),
+                                Text(
+                                  'Cost',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          // Expanded(
-                          //   child: SizedBox(width: 0,),
-                          // ),
-
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
                           Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
+                            child: SizedBox(width: 0,),
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
 
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
+                    Column(
+                      children: [
+                        ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => buildPrice(),
+                            separatorBuilder: (context, index) =>SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
+                            itemCount: 10),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: OutlinedButton(
-                        onPressed: (){},
-                        child: Container(
-                            height: 40,
-                            width: 60,
-                            child:Row(
-                              children: [
-                                Container(child: Text('Edit')),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  Icons.edit_outlined,
-                                  size: 20.0,),
-                              ],
-                            )
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: Row(
+                    //
+                    //     children: [
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 45,
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(6),
+                    //               border: Border.all(color: Colors.grey,width: 1)
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    //             child: Row(
+                    //               children: [
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Text('Mansoura',
+                    //                       style: TextStyle(
+                    //                         fontSize: 16,
+                    //
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('Cairo',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('50',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 5,
+                    //       ),
+                    //       OutlinedButton(
+                    //         onPressed: (){},
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Icon(
+                    //             Icons.edit_outlined,
+                    //             size: 20.0,),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    //
+                    //
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: Row(
+                    //
+                    //     children: [
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 45,
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(6),
+                    //               border: Border.all(color: Colors.grey,width: 1)
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    //             child: Row(
+                    //               children: [
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Text('Mansoura',
+                    //                       style: TextStyle(
+                    //                         fontSize: 16,
+                    //
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('Cairo',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('50',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 5,
+                    //       ),
+                    //       OutlinedButton(
+                    //         onPressed: (){},
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Icon(
+                    //             Icons.edit_outlined,
+                    //             size: 20.0,),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: Row(
+                    //
+                    //     children: [
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 45,
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(6),
+                    //               border: Border.all(color: Colors.grey,width: 1)
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    //             child: Row(
+                    //               children: [
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Text('Mansoura',
+                    //                       style: TextStyle(
+                    //                         fontSize: 16,
+                    //
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('Cairo',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('50',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 5,
+                    //       ),
+                    //       OutlinedButton(
+                    //         onPressed: (){},
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Icon(
+                    //             Icons.edit_outlined,
+                    //             size: 20.0,),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    //
+                    //
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: Row(
+                    //
+                    //     children: [
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 45,
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(6),
+                    //               border: Border.all(color: Colors.grey,width: 1)
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    //             child: Row(
+                    //               children: [
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Text('Mansoura',
+                    //                       style: TextStyle(
+                    //                         fontSize: 16,
+                    //
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('Cairo',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('50',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 5,
+                    //       ),
+                    //       OutlinedButton(
+                    //         onPressed: (){},
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Icon(
+                    //             Icons.edit_outlined,
+                    //             size: 20.0,),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    //
+                    //
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: Row(
+                    //
+                    //     children: [
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 45,
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(6),
+                    //               border: Border.all(color: Colors.grey,width: 1)
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    //             child: Row(
+                    //               children: [
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Text('Mansoura',
+                    //                       style: TextStyle(
+                    //                         fontSize: 16,
+                    //
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('Cairo',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('50',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 5,
+                    //       ),
+                    //       OutlinedButton(
+                    //         onPressed: (){},
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Icon(
+                    //             Icons.edit_outlined,
+                    //             size: 20.0,),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    //
+                    //
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: Row(
+                    //
+                    //     children: [
+                    //       Expanded(
+                    //         child: Container(
+                    //           height: 45,
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(6),
+                    //               border: Border.all(color: Colors.grey,width: 1)
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(horizontal:10.0),
+                    //             child: Row(
+                    //               children: [
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Text('Mansoura',
+                    //                       style: TextStyle(
+                    //                         fontSize: 16,
+                    //
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('Cairo',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Expanded(
+                    //                   child: Container(
+                    //
+                    //                     child: Center(
+                    //                       child: Text('50',
+                    //                         style: TextStyle(
+                    //                           fontSize: 16,
+                    //
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 5,
+                    //       ),
+                    //       OutlinedButton(
+                    //         onPressed: (){},
+                    //         child: Container(
+                    //           height: 40,
+                    //           child: Icon(
+                    //             Icons.edit_outlined,
+                    //             size: 20.0,),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    //
+                    //
+                    // ),
+                    // SizedBox(
+                    //   height: 15,
+                    // ),
+                    // Center(
+                    //   child: OutlinedButton(
+                    //     onPressed: (){},
+                    //     child: Container(
+                    //         height: 40,
+                    //         width: 60,
+                    //         child:Row(
+                    //           children: [
+                    //             Container(child: Text('Edit')),
+                    //             SizedBox(
+                    //               width: 10,
+                    //             ),
+                    //             Icon(
+                    //               Icons.edit_outlined,
+                    //               size: 20.0,),
+                    //           ],
+                    //         )
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -574,5 +584,80 @@ class AdminTicketPriceScreen extends StatelessWidget {
     }
     );
   }
+  Widget buildPrice() => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10.0),
+    child: Row(
 
+      children: [
+        Expanded(
+          child: Container(
+            height: 45,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Colors.grey,width: 1)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal:10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+
+                      child: Text('Mansoura',
+                        style: TextStyle(
+                          fontSize: 16,
+
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+
+                      child: Center(
+                        child: Text('Cairo',
+                          style: TextStyle(
+                            fontSize: 16,
+
+                          ),),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+
+                      child: Center(
+                        child: Text('50',
+                          style: TextStyle(
+                            fontSize: 16,
+
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        OutlinedButton(
+          onPressed: (){},
+          child: Container(
+            height: 40,
+            child: Icon(
+              Icons.edit_outlined,
+              size: 20.0,),
+          ),
+        ),
+      ],
+    ),
+
+
+  );
+//void ShowBottomSheet() =>ShowModelBottomSheet();
 }
