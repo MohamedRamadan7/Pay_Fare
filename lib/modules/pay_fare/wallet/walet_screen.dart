@@ -23,55 +23,7 @@ class WalletScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Container(
-                    //   width: double.infinity,
-                    //   height: 150,
-                    //
-                    //   padding: EdgeInsets.all( 35.0),
-                    //   child: Column(
-                    //       mainAxisAlignment: MainAxisAlignment.start,
-                    //       children:
-                    //       [
-                    //
-                    //         Text('currant balance',
-                    //           style: TextStyle(
-                    //             fontSize: 20.0,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.black,
-                    //           ),
-                    //         ),
-                    //         SizedBox(
-                    //           height: 25.0,
-                    //         ),
-                    //         Row(
-                    //           crossAxisAlignment: CrossAxisAlignment.end,
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //             Text('00.00',
-                    //               style: TextStyle(
-                    //                 fontSize: 25.0,
-                    //                 color: Colors.black,
-                    //               ),
-                    //             ),
-                    //             Text('L.E',
-                    //               style: TextStyle(
-                    //                 fontSize: 15.0,
-                    //                 fontWeight: FontWeight.w600,
-                    //                 color: Colors.black,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //
-                    //       ]
-                    //   ),
-                    //   decoration: BoxDecoration(
-                    //     // border: Border.all(color: defaultColor,
-                    //     //     width: 10),
-                    //     color: defaultColor,
-                    //     borderRadius: BorderRadius.circular(20.0,),
-                    //   ),
-                    // ),
+
                     BalanceCard(balance: AppCubit.get(context).balance),
                     SizedBox(
                       height:50.0 ,),

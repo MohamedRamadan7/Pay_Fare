@@ -33,7 +33,7 @@ class _OnBoardingState extends State<OnBoarding> {
     ),
     BoardingModel(
       image: 'assets/images/onboarding2.png',
-      title: 'East Payment',
+      title: 'Easy Payment',
       body: 'We Open For any Payment Method to Make you feel easy ',
 
     ),
