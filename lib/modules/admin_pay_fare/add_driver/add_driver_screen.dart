@@ -123,12 +123,13 @@ class AdminAddDriverScreen extends StatelessWidget {
                         child: ButtonTheme(
                           alignedDropdown: true,
                           child: DropdownButton<String>(
-                            onTap: (){
-                              DioHelper.getData(url: 'station').then((value) {
-                                StationModel st =StationModel.fromJson(value.data[0]);
-                                print(st.name);
-                              });
-                            },
+                            // onTap: (){
+                            //   DioHelper.getData(url: 'station').then((value) {
+                            //     StationModel st =StationModel.fromJson(value.data[0]);
+                            //     print(st.name);
+                            //     AdminCubit.get(context).station;
+                            //   });
+                            // },
                               isExpanded: true,
                               hint: Text('Station'),
                               iconSize: 36,
@@ -221,6 +222,16 @@ class AdminAddDriverScreen extends StatelessWidget {
                           width: 200,
                           function: ()
                           {
+                          DioHelper.getData(url: 'station').then((value) {
+                          StationModel st =StationModel.fromJson(value.data[0]);
+                          print(st.city);
+                          AdminCubit.get(context).station;
+                          });
+                            //AdminCubit.get(context).station;
+                            //AdminCubit.get(context).getStationData();
+                            //print(AdminCubit.get(context).stationModel);
+                            //List<Map<String, dynamic>> map = AdminCubit.get(context).stationModel! as List<Map<String, dynamic>>;
+                           // print(AdminCubit.get(context).stationModel);
                             //  navigateTo(context, widget);
                           },
                           text: 'Save',

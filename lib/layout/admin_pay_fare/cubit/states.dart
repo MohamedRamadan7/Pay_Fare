@@ -21,3 +21,5 @@ class AdminSuccessStationState extends AdminStates {
 }
 
 class AdminErrorStationState extends AdminStates {}
+
+class changePriceState extends AdminStates{}

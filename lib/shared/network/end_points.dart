@@ -5,3 +5,5 @@ const PROFILE = 'client/get-by-user-id';
 const GETDRIVER = 'driver/phone';
 const STATION = 'station';
 const GETCHAIR= 'car/chairs';
+const ADDWALLET= 'client/addAmount';
+const SENDAMOUNT= 'client/transAmount';

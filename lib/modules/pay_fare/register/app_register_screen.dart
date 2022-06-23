@@ -168,17 +168,20 @@ class AppRegisterScreen extends StatelessWidget {
                                       await  AppRegisterCubit.get(context).submitPhoneNumber(phoneController.text);
                                       navigateTo(context, OtpScreen(phoneNumber: phoneController.text));
 
-                                      AppRegisterCubit.get(context).userRegister(
-                                        name: nameController.text,
-                                        username: phoneController.text,
-                                        password: passwordController.text,
-                                        phone: phoneController.text,
-                                      );
-                                      print('name ${nameController.text}');
-                                      print('username ${passwordController.text}');
-                                      print('pass ${passwordController.text}');
-                                      print('phone ${phoneController.text}');
-                                    }
+                                      await  AppRegisterCubit.get(context).submitPhoneNumber(phoneController.text);
+                                      navigateTo(context, OtpScreen(phoneNumber: phoneController.text));
+
+                                    //   AppRegisterCubit.get(context).userRegister(
+                                    //     name: nameController.text,
+                                    //     username: phoneController.text,
+                                    //     password: passwordController.text,
+                                    //     phone: phoneController.text,
+                                    //   );
+                                    //   print('name ${nameController.text}');
+                                    //   print('username ${passwordController.text}');
+                                    //   print('pass ${passwordController.text}');
+                                    //   print('phone ${phoneController.text}');
+                                     }
                                     //navigateAndFinish(context, AppLayout());
                                   },
                                   text: 'REGISTER',

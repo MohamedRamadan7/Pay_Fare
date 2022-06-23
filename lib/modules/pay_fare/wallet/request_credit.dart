@@ -17,7 +17,7 @@ class RequestCreditScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Send Credit'),
+            title: Text('request Credit'),
           ),
           body: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -62,6 +62,7 @@ class RequestCreditScreen extends StatelessWidget {
                       navigateTo(context,ListViewPage(amountToPay: double.parse(numberController.text)));
                     },
                     text: 'Next')
+////
               ],
             ),
           ),

@@ -67,7 +67,7 @@ class ClientLoginModel {
   ClientLoginModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'] != null ? new UserData.fromJson(json['user']) : null;
-    wallet = json['wallet'];
+    wallet = json['amount'];
   }
 
   Map<String, dynamic> toJson() {

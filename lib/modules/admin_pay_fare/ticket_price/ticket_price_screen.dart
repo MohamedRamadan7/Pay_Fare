@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/admin_pay_fare/cubit/cubit.dart';
@@ -9,6 +10,7 @@ class AdminTicketPriceScreen extends StatelessWidget {
   var fromController = TextEditingController();
   var toController = TextEditingController();
   var costController = TextEditingController();
+  var editPriceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -76,496 +78,37 @@ class AdminTicketPriceScreen extends StatelessWidget {
                           Expanded(
                             child: Column(
                               children: [
-                                Center(
-                                  child: Text(
-                                    'Cost',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600
-                                    ),
+                                Text(
+                                  'Cost',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          // Expanded(
-                          //   child: SizedBox(width: 0,),
-                          // ),
-
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
                           Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
+                            child: SizedBox(width: 0,),
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
 
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
+                    Column(
+                      children: [
+                        ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => buildPrice(context,index),
+                            separatorBuilder: (context, index) =>SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey,width: 1)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal:10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Text('Mansoura',
-                                          style: TextStyle(
-                                            fontSize: 16,
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('Cairo',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Center(
-                                          child: Text('50',
-                                            style: TextStyle(
-                                              fontSize: 16,
-
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // OutlinedButton(
-                          //   onPressed: (){},
-                          //   child: Container(
-                          //     height: 40,
-                          //     child: Icon(
-                          //       Icons.edit_outlined,
-                          //       size: 20.0,),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-
-
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: OutlinedButton(
-                        onPressed: (){},
-                        child: Container(
-                            height: 40,
-                            width: 60,
-                            child:Row(
-                              children: [
-                                Container(child: Text('Edit')),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  Icons.edit_outlined,
-                                  size: 20.0,),
-                              ],
-                            )
+                            itemCount: AdminCubit.get(context).pricies.length,
                         ),
-                      ),
+                      ],
                     ),
+                   
                   ],
                 ),
               ),
@@ -574,5 +117,123 @@ class AdminTicketPriceScreen extends StatelessWidget {
     }
     );
   }
+  Widget buildPrice(context,int index) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10.0),
+    child: Row(
+
+      children: [
+        Expanded(
+          child: Container(
+            height: 45,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Colors.grey,width: 1)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal:10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+
+                      child: Text(AdminCubit.get(context).pricies[index]["cityfrom"],
+                        style: TextStyle(
+                          fontSize: 16,
+
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+
+                      child: Center(
+                        child: Text(AdminCubit.get(context).pricies[index]["cityto"],
+                          style: TextStyle(
+                            fontSize: 16,
+
+                          ),),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+
+                      child: Center(
+                        child: Text(AdminCubit.get(context).pricies[index]["price"].toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        OutlinedButton(
+          onPressed: (){
+            showModalBottomSheet(
+              enableDrag: false,
+
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              context: context,
+              builder: (context) => Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 25,
+                ),
+                ListTile(
+                  //leading: Icon(Icons.money),
+                  title:defaultFormFiled(
+                  controller: editPriceController,
+                  type: TextInputType.number,
+                  fixIcon: Icons.money) ,
+                  onTap: (){},
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                defaultButton(
+                    function: ()
+                    {
+
+                      AdminCubit.get(context).changePrice(index,int.parse(editPriceController.text));
+                      // pricies[index]["price"]=int.parse(editPriceController.text) ;
+                      Navigator.pop(context);
+                    },
+                    text: 'save',
+                    width: 150,
+                )
+              ],
+            ),
+            );
+          },
+          child: Container(
+            height: 40,
+            child: Icon(
+              Icons.edit_outlined,
+              size: 20.0,),
+          ),
+        ),
+
+      ],
+    ),
+
+
+  );
+
 
 }

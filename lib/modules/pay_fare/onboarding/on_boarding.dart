@@ -21,34 +21,30 @@ class OnBoarding extends StatefulWidget {
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
-
 class _OnBoardingState extends State<OnBoarding> {
   var boardController= PageController();
-
   List<BoardingModel> boarding=
   [
     BoardingModel(
         image: 'assets/images/onboarding.png',
-        title: 'On Board 1 Title',
-        body: 'On Board 1 Body',
+        title: 'Welcome To Pay Fare',
+        body: 'Safe and easy trip',
 
     ),
     BoardingModel(
-      image: 'assets/images/onboarding.png',
-      title: 'On Board 2 Title',
-      body: 'On Board 2 Body',
+      image: 'assets/images/onboarding2.png',
+      title: 'Easy Payment',
+      body: 'We Open For any Payment Method to Make you feel easy ',
 
     ),
     BoardingModel(
-      image: 'assets/images/onboarding.png',
-      title: 'On Board 3 Title',
-      body: 'On Board 3 Body',
+      image: 'assets/images/blockchain.png',
+      title: 'Security Blockchain',
+      body: 'Blockchain works as a distributed network that enables decentralization of data which makes it more secure and hard to tamper technology. ',
 
     ),
   ];
-
   bool isLast =false;
-
   void submit()
   {
     //CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
@@ -110,7 +106,6 @@ class _OnBoardingState extends State<OnBoarding> {
                     controller: boardController,
                     count: boarding.length,
                   effect: ExpandingDotsEffect(
-
                     dotColor: Colors.grey,
                     activeDotColor: defaultColor,
                     expansionFactor: 4,

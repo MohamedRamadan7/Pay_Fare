@@ -1,5 +1,6 @@
 import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/client_model/client_login_model.dart';
+import 'package:pay_fare/models/client_model/client_wallet_model.dart';
 
 abstract class AppStates {}
 
@@ -30,3 +31,13 @@ class AppSuccessChairDataState extends AppStates {
 }
 
 class AppErrorChairDataState extends AppStates {}
+
+class AppSuccessWalletDataState extends AppStates {}
+
+class AppErrorWalletDataState extends AppStates {}
+
+
+class AppSuccessSendBalanceState extends AppStates {}
+
+class AppErrorSendBalanceState extends AppStates {}
+
