@@ -139,7 +139,6 @@ class ScanScreen extends StatelessWidget {
                                     amountToPay: amountToPay,
                                   )));
 
-                          //  navigateTo(context, widget);
                         },
                         text: 'pay',
                         isUberCase: true),

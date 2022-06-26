@@ -222,21 +222,28 @@ class AdminAddDriverScreen extends StatelessWidget {
                           width: 200,
                           function: ()
                           {
-                          DioHelper.getData(url: 'station').then((value) {
-                          StationModel st =StationModel.fromJson(value.data[0]);
-                          print(st.city);
-                          AdminCubit.get(context).station;
-                          });
-                            //AdminCubit.get(context).station;
                             //AdminCubit.get(context).getStationData();
-                            //print(AdminCubit.get(context).stationModel);
-                            //List<Map<String, dynamic>> map = AdminCubit.get(context).stationModel! as List<Map<String, dynamic>>;
-                           // print(AdminCubit.get(context).stationModel);
-                            //  navigateTo(context, widget);
+                            //AdminCubit.get(context).getOwnerData();
+                            //AdminCubit.get(context).getTrafficData();
+
+
+                            AdminCubit.get(context).driverRegister(
+                                name: driverNameController.text,
+                                username: phoneController.text,
+                                phone: phoneController.text,
+                                liceNum: licenseNumberController.text
+                            );
+
+                            AdminCubit.get(context).PostCar(
+                                carPlateNum: plateNumberController.text,
+                                carCapacity: carCapacityController.text,
+                                qrCode: plateNumberController.text);
+
                           },
                           text: 'Save',
                           isUberCase: false
                       ),
+
                     )
 
                   ],

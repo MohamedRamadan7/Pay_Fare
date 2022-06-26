@@ -123,7 +123,7 @@ class DriverHomeScreen extends StatelessWidget {
                       child: SizedBox(),
                     ),
                     Text(
-                      'Car Id : ${cubit.driverModel!.car!.traffic!.id}',
+                      'Car Id : ${cubit.driverModel!.car!.id}',
                       style: TextStyle(
                           fontSize: 18.0,
                           color: Colors.black,

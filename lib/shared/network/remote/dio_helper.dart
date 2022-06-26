@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class DioHelper {
   static Dio dio = Dio(
     BaseOptions(
-      baseUrl: 'https://pay-fare.herokuapp.com/',
+      baseUrl: 'https://payfareserver.azurewebsites.net/',
       receiveDataWhenStatusError: true,
     ),
   );
@@ -11,7 +11,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://pay-fare.herokuapp.com/',
+        baseUrl: 'https://payfareserver.azurewebsites.net/',
         receiveDataWhenStatusError: true,
       ),
     );

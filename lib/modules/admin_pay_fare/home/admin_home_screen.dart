@@ -20,13 +20,31 @@ class AdminHomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Active Driver',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ) ,
+                  Row(
+                    children: [
+
+                      Image.asset('assets/images/travel.png',width: 50,),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Active Driver',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Text('Active Driver',
+                  //   style: TextStyle(
+                  //     fontSize: 20.0,
+                  //     fontWeight: FontWeight.bold,
+                  //     color: Colors.black,
+                  //   ),
+                  // ) ,
                   SizedBox(
                     height: 20.0,
                   ),
@@ -78,8 +96,8 @@ class AdminHomeScreen extends StatelessWidget {
                   ),
                   Text('Driver Name',
                     style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
 
                       color: Colors.black,
                       // fontWeight: FontWeight.bold
@@ -88,8 +106,8 @@ class AdminHomeScreen extends StatelessWidget {
                   Spacer(),
                   Text('Car Id ',
                     style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
 
                       color: Colors.black,
                       // fontWeight: FontWeight.bold
@@ -102,10 +120,10 @@ class AdminHomeScreen extends StatelessWidget {
           ]
       ),
       decoration: BoxDecoration(
-        color: defaultColor,
-        // border: Border.all(color: defaultColor,
-        //     width: 10),
-        borderRadius: BorderRadius.circular(50.0,),
+       // color: defaultColor,
+         border: Border.all(color: defaultColor,
+             width: 2),
+        borderRadius: BorderRadius.circular(20.0,),
       ),
     ),
   );

@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => AppCubit()..getUserData(),
         ),
         BlocProvider(
-          create: (BuildContext context) => DriverCubit()..getDriverData(),
+          create: (BuildContext context) => DriverCubit()..getDriverData()..getChairData(),
         ),
         BlocProvider(
-          create: (BuildContext context) => AdminCubit(),
+          create: (BuildContext context) => AdminCubit()..getStationData()..getOwnerData()..getTrafficData(),
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(

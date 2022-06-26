@@ -146,23 +146,22 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
-  GetChair? chairModel;
-  void getChairData() {
-    DioHelper.getData(url: GETCHAIR, query: {
-      'id':'8',
-    }).then((value) {
-      chairModel = GetChair.fromJson(value.data);
-      //List<Map<String, dynamic>> map =value.data;
-      // print(map);
-      print(chairModel!.chairNumber);
-      print(chairModel!.status);
-      emit(AppSuccessChairDataState(chairModel!));
-    }).catchError((error) {
-      print(error.toString());
-      emit(AppErrorChairDataState());
-    });
-  }
+  // GetChair? chairModel;
+  // void getChairData() {
+  //   DioHelper.getData(url: GETCHAIR, query: {
+  //     'id':'8',
+  //   }).then((value) {
+  //     chairModel = GetChair.fromJson(value.data);
+  //     //List<Map<String, dynamic>> map =value.data;
+  //     //print(map);
+  //     print(chairModel!.chairNumber);
+  //     print(chairModel!.status);
+  //     emit(AppSuccessChairDataState(chairModel!));
+  //   }).catchError((error) {
+  //     print(error.toString());
+  //     emit(AppErrorChairDataState());
+  //   });
+  // }
 
 
 }

@@ -25,7 +25,7 @@ class ListViewPage extends StatelessWidget {
                   log('responsesssssssssssss: ${response.status}');
                   log('response: ${response}');
                   if(response.status==PaymentStatus.Success){
-                    AppCubit.get(context).balance -= amountToPay;
+                    AppCubit.get(context).balance += amountToPay;
                     CacheHelper.saveData(key: 'balanceClient', value: AppCubit.get(context).balance);
                   }
                 },

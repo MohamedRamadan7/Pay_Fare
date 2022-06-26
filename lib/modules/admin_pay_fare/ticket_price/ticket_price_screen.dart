@@ -199,6 +199,7 @@ class AdminTicketPriceScreen extends StatelessWidget {
                   //leading: Icon(Icons.money),
                   title:defaultFormFiled(
                   controller: editPriceController,
+                  lable: 'Price',
                   type: TextInputType.number,
                   fixIcon: Icons.money) ,
                   onTap: (){},
