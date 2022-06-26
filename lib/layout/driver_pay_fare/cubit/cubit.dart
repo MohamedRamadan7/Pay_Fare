@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/driver_pay_fare/cubit/states.dart';
+import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/driver_model/get_driver_model.dart';
 import 'package:pay_fare/modules/driver_pay_fare/archive/driver_archive_screen.dart';
 import 'package:pay_fare/modules/driver_pay_fare/home/driver_home_screen.dart';
@@ -82,4 +83,51 @@ class DriverCubit extends Cubit<DriverStates> {
       emit(DriverErrorDriverDataState());
     });
   }
+
+  GetChair? chairModel;
+  List <Map<String,dynamic>> chair=[];
+  void getChairData() {
+    DioHelper.getData(url: GETCHAIR, query: {
+      'id':'10',
+    }).then((value) {
+      //chairModel = GetChair.fromJson(value.data);
+      for (var item in value.data) {
+      //print(item['id']);
+     chairModel = GetChair.fromJson(item);
+     chair.add(item);
+    }
+      GetChair stm1 =  GetChair.fromJson(chair[5]);
+      //print(chairModel!.chairNumber);
+     // print(chairModel!.status);
+      emit(DriverSuccessChairDataState(chairModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(DriverErrorChairDataState());
+    });
+  }
+
 }
+
+
+
+//
+// StationModel? stationModel;
+// void getStationData() {
+//   DioHelper.getData(url: STATION).then((value) {
+//     station.clear();
+//     for (var item in value.data) {
+//       //print(item['id']);
+//       stationModel = StationModel.fromJson(item);
+//       stationnew.add(item);
+//       station.add(stationModel!.name.toString());
+//     }
+//     //StationModel stm1 =  StationModel.fromJson(stationnew[0]);
+//     //print(stm1.id);
+//
+//
+//     emit(AdminSuccessStationState(stationModel!));
+//   }).catchError((error) {
+//     print(error.toString());
+//     emit(AdminErrorStationState());
+//   });
+// }

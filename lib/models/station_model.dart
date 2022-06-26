@@ -10,6 +10,7 @@ class StationModel {
     city = json['city'] != null ? new City.fromJson(json['city']) : null;
     name = json['name'];
   }
+
 }
 
 class City {

@@ -31,17 +31,27 @@ class AdminArrangingScreen extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 10.0),
     child: Row(
       children: [
-        defaultButton(
-        width: 115,
-        fontColor: Colors.black,
-        function: ()
-        {
-          //  navigateTo(context, widget);
-        },
-        text: 'The Turn',
-        isUberCase: false,
-          radius: 30
+        Container(
+          child: defaultButton(
+          width: 115,
+          fontColor: Colors.black,
+          fontSize: 16.0,
+          background: Colors.white,
+          function: ()
+          {
+            //  navigateTo(context, widget);
+          },
+          text: 'The Turn',
+          isUberCase: false,
+            radius: 15
     ),
+          decoration: BoxDecoration(
+            // color: defaultColor,
+            border: Border.all(color: defaultColor,
+                width: 2),
+            borderRadius: BorderRadius.circular(15.0,),
+          ),
+        ),
         SizedBox(
           width: 20,
         ),
@@ -59,8 +69,8 @@ class AdminArrangingScreen extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
 
                       color: Colors.black,
                       // fontWeight: FontWeight.bold
@@ -72,10 +82,10 @@ class AdminArrangingScreen extends StatelessWidget {
             ),
           ),
           decoration: BoxDecoration(
-            color: defaultColor,
-            // border: Border.all(color: defaultColor,
-            //     width: 10),
-            borderRadius: BorderRadius.circular(40.0,),
+            // color: defaultColor,
+            border: Border.all(color: defaultColor,
+                width: 2),
+            borderRadius: BorderRadius.circular(15.0,),
           ),
         )
       ],

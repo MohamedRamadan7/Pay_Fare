@@ -1,3 +1,4 @@
+import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/driver_model/get_driver_model.dart';
 
 abstract class DriverStates {}
@@ -20,3 +21,10 @@ class DriverSuccessDriverDataState extends DriverStates {
 }
 
 class DriverErrorDriverDataState extends DriverStates {}
+
+class DriverSuccessChairDataState extends DriverStates {
+  final GetChair chairModel;
+  DriverSuccessChairDataState(this.chairModel);
+}
+
+class DriverErrorChairDataState extends DriverStates {}

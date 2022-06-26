@@ -155,9 +155,6 @@ class AppRegisterScreen extends StatelessWidget {
                             height: 30.0,
                           ),
 
-                          // SizedBox(
-                          //   height: 30.0,
-                          // ),
                           state is! AppRegisterLoadingState
                               ? defaultButton(
                                   function: () async {

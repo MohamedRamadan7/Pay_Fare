@@ -65,6 +65,7 @@ class DriverNotificationsScreen extends StatelessWidget {
                         radius: 30,
                         width: 180,
                         function: () {
+                          DriverCubit.get(context).getChairData();
 
                           //  navigateTo(context, widget);
                         },
@@ -85,20 +86,11 @@ class DriverNotificationsScreen extends StatelessWidget {
         //color:defaultColor,
         child: Column(
           children: [
-            InkWell(
-              onTap: () {
-                print(index);
-                DriverCubit.get(context).changeChair(index);
-                print(DriverCubit.get(context).colorChair[index]);
-              },
-              child: Image.asset(
-                'assets/images/car.png',
-                height: 50,
-                width: double.infinity,
-                color: DriverCubit.get(context).colorChair[index]!
-                    ? Colors.green
-                    : Colors.grey[600],
-              ),
+            Image.asset(
+              'assets/images/car.png',
+              height: 50,
+              width: double.infinity,
+              color: DriverCubit.get(context).chair[index]['status'] ==1 ? Colors.green : Colors.grey[600],
             ),
             Text('chair ${14 - index}'),
           ],
