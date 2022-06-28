@@ -25,6 +25,8 @@ class AdminLayout extends StatelessWidget {
             onTap:(index)
             {
               cubit.changeBottomNave(index);
+              cubit.getAllQueueData();
+              cubit.getDriversOnline();
             },
             items: [
               BottomNavigationBarItem(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pay_fare/layout/admin_pay_fare/cubit/cubit.dart';
+import 'package:pay_fare/layout/admin_pay_fare/cubit/states.dart';
 import 'package:pay_fare/shared/components/components.dart';
 import 'package:pay_fare/shared/styles/colors.dart';
 
@@ -6,28 +9,50 @@ class AdminArrangingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
 
-      body:  SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            ListView.separated(
-              shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => buildArranging(),
-                separatorBuilder: (context, index) =>SizedBox(
-                  height: 20,
+    return BlocConsumer<AdminCubit,AdminStates>(
+      listener: (context,states){},
+      builder: (context,states){
+        var length = AdminCubit.get(context).DriversOnline.length;
+        return Scaffold(
+
+          body:  SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                length > 0 ? ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => buildArranging(context, index),
+                    separatorBuilder: (context, index) =>SizedBox(
+                      height: 20,
+                    ),
+                    itemCount:length ) : Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.menu,
+                        size: 80.0,
+                        color: Colors.grey,),
+                      Text(' No Drivers in the Station ',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                itemCount: 10),
-          ],
-        ),
-      ),
+              ],
+            ),
+          ),
 
+        );
+      },
     );
   }
 
-  Widget buildArranging() => Padding(
+  Widget buildArranging(context, index) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10.0),
     child: Row(
       children: [
@@ -39,7 +64,7 @@ class AdminArrangingScreen extends StatelessWidget {
           background: Colors.white,
           function: ()
           {
-            //  navigateTo(context, widget);
+            AdminCubit.get(context).PostDriverInQueue(driver_code:AdminCubit.get(context).DriversOnline[index]['driverCode']);
           },
           text: 'The Turn',
           isUberCase: false,
@@ -65,7 +90,7 @@ class AdminArrangingScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:
                 [
-                  Text('Car Id ',
+                  Text('Car Id: ${AdminCubit.get(context).DriversOnline[index]['car']['id']} ',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -76,8 +101,6 @@ class AdminArrangingScreen extends StatelessWidget {
                       // fontWeight: FontWeight.bold
                     ),
                   ),
-
-
                 ]
             ),
           ),

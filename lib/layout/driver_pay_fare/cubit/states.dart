@@ -1,3 +1,4 @@
+import 'package:pay_fare/models/car_model/car_trips_model.dart';
 import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/driver_model/get_driver_model.dart';
 
@@ -28,3 +29,18 @@ class DriverSuccessChairDataState extends DriverStates {
 }
 
 class DriverErrorChairDataState extends DriverStates {}
+
+class DriverSuccessStatusState extends DriverStates {}
+
+class DriverErrorStatusState extends DriverStates {}
+
+class DriverSuccessRestChairsState extends DriverStates {}
+
+class DriverErrorRestChairsState extends DriverStates {}
+
+class DriverSuccessCarTripsState extends DriverStates {
+  final CarTripsModel carTripsModel;
+  DriverSuccessCarTripsState(this.carTripsModel);
+}
+
+class DriverErrorCarTripsState extends DriverStates {}

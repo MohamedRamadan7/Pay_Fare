@@ -9,7 +9,14 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit,AppStates>(
-      listener: (context , state){},
+      listener: (context , state)
+      {
+        // if(state is AppInitialState)
+        //   {
+        //     AppCubit.get(context).getUserData();
+        //     AppCubit.get(context).getClientHistoryData();
+        //   }
+      },
       builder: (context , state){
         var cubit = AppCubit.get(context);
         return Scaffold(

@@ -4,16 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/admin_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/admin_pay_fare/cubit/states.dart';
+import 'package:pay_fare/shared/components/components.dart';
+import 'package:pay_fare/shared/network/local/cache_helper.dart';
 import 'package:pay_fare/shared/styles/colors.dart';
 
 class AdminHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var numberDrivers =10;
     return BlocConsumer<AdminCubit,AdminStates>(
-      listener: (context, state){},
+      listener: (context, state){
+
+      },
       builder: (context, state){
+        var numberDrivers =AdminCubit.get(context).AllDriverInQueue.length;
+
         return Scaffold(
             body: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -38,20 +43,13 @@ class AdminHomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Text('Active Driver',
-                  //   style: TextStyle(
-                  //     fontSize: 20.0,
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Colors.black,
-                  //   ),
-                  // ) ,
                   SizedBox(
                     height: 20.0,
                   ),
                   numberDrivers> 0? ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => buildActiveDriver(),
+                      itemBuilder: (context, index) => buildActiveDriver(context,index),
                       separatorBuilder: (context, index) =>SizedBox(
                         height: 20,
                       ),
@@ -70,7 +68,23 @@ class AdminHomeScreen extends StatelessWidget {
                               )
                             ],
                   ),
-                       ),
+                  ),
+                  SizedBox(height: 20,),
+                  Center(
+                    child: defaultButton(
+                      width: 150,
+                        fontColor: Colors.white,
+                        background: defaultColor,
+                        function: ()
+                        {
+                         AdminCubit.get(context).RemoveFromQueue(adminId: CacheHelper.getData(key: 'adminId'));
+                        // AdminCubit.get(context).PutDriverStatus(id: int.parse('${AdminCubit.get(context).DriversID[0]}'), value: 0);
+                        // AdminCubit.get(context).getDriversOnline();
+
+                        },
+                        text: 'Remove',
+                    ),
+                  )
                 ],
               ),
             ),
@@ -78,7 +92,7 @@ class AdminHomeScreen extends StatelessWidget {
       },
     );
   }
-  Widget buildActiveDriver() => Padding(
+  Widget buildActiveDriver(context,index) => Padding(
     padding: const EdgeInsets.symmetric(horizontal:10.0),
     child: Container(
       padding: EdgeInsets.symmetric(vertical: 10.0),
@@ -94,7 +108,7 @@ class AdminHomeScreen extends StatelessWidget {
                   SizedBox(
                     width: 10.0,
                   ),
-                  Text('Driver Name',
+                  Text('${AdminCubit.get(context).AllDriverInQueue[index]['driverCode']}',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,

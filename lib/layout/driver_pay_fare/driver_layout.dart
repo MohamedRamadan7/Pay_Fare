@@ -8,7 +8,11 @@ class DriverLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DriverCubit,DriverStates>(
-      listener: (context , state){},
+      listener: (context , state)
+      {
+        if(state is DriverSuccessDriverDataState)
+        DriverCubit.get(context).getChairData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
+      },
       builder: (context , state){
 
         var cubit = DriverCubit.get(context);

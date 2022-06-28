@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/driver_pay_fare/cubit/states.dart';
+import 'package:pay_fare/models/car_model/car_trips_model.dart';
 import 'package:pay_fare/models/car_model/get_chair_model.dart';
+import 'package:pay_fare/models/driver_model/change_status_drive_model.dart';
 import 'package:pay_fare/models/driver_model/get_driver_model.dart';
+import 'package:pay_fare/models/driver_model/rest_chairs_model.dart';
 import 'package:pay_fare/modules/driver_pay_fare/archive/driver_archive_screen.dart';
 import 'package:pay_fare/modules/driver_pay_fare/home/driver_home_screen.dart';
 import 'package:pay_fare/modules/driver_pay_fare/notifications/notification_screen.dart';
@@ -62,9 +65,15 @@ class DriverCubit extends Cubit<DriverStates> {
 
   IconData icon = Icons.toggle_off;
   bool Active = true;
-
+  int value=0;
   void ChangeActiveVisibility() {
     Active = !Active;
+    if(Active==true)
+      {
+        value=0;
+      }else{
+      value=1;
+    }
     icon = Active ? Icons.toggle_off : Icons.toggle_on;
     emit(DriverChangeActiveVisibilityState());
   }
@@ -77,6 +86,8 @@ class DriverCubit extends Cubit<DriverStates> {
     }).then((value) {
       driverModel = GetDriverModel.fromJson(value.data);
       print('data driver : ${driverModel!.user!.name}');
+      getChairData(int.parse('${driverModel!.car!.id}'));
+      getCarTripsData(int.parse('${driverModel!.car!.id}')); 
       emit(DriverSuccessDriverDataState(driverModel!));
     }).catchError((error) {
       print(error.toString());
@@ -86,9 +97,9 @@ class DriverCubit extends Cubit<DriverStates> {
 
   GetChair? chairModel;
   List <Map<String,dynamic>> chair=[];
-  void getChairData() {
+  void getChairData(int carid) {
     DioHelper.getData(url: GETCHAIR, query: {
-      'id':'10',
+      'id':carid,
     }).then((value) {
       //chairModel = GetChair.fromJson(value.data);
       for (var item in value.data) {
@@ -106,28 +117,71 @@ class DriverCubit extends Cubit<DriverStates> {
     });
   }
 
+  DriverStatusModel? driverStatusModel;
+  void PutDriverStatus({
+    required int id,
+    required int value,
+  })
+  {
+    //emit(AppLoadingGrtDataState());
+    DioHelper.putData(url:DRIVERSTATUS,
+        query: {
+        'id':id,
+        'value':value,
+    }
+    ).then((value) {
+      driverStatusModel = DriverStatusModel.fromJson(value.data);
+      print(value.data);
+      emit(DriverSuccessStatusState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(DriverErrorStatusState());
+    });
+  }
+
+
+  RestChairsModel? restCharsModel;
+  void RestChairs({
+    required int id,
+  })
+  {
+    DioHelper.putData(url:RESTCAIR,
+        query: {
+          'id':id,
+        }
+    ).then((value) {
+      restCharsModel = RestChairsModel.fromJson(value.data);
+      print(value.data);
+      emit(DriverSuccessRestChairsState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(DriverErrorRestChairsState());
+    });
+  }
+
+  CarTripsModel? carTripsModel;
+  List <Map<String,dynamic>> carTrips=[];
+  void getCarTripsData(int carid) {
+    DioHelper.getData(url: CARTRIPS, query: {
+      'carId':carid,
+    }).then((value) {
+      //carTripsModel = CarTripsModel.fromJson(value.data);
+      for (var item in value.data) {
+        //print(item['id']);
+        carTripsModel = CarTripsModel.fromJson(item);
+        carTrips.add(item);
+      }
+      CarTripsModel stm1 =  CarTripsModel.fromJson(carTrips[5]);
+      //print(carTrips[0]['date']);
+      // print(chairModel!.status);
+      emit(DriverSuccessCarTripsState(carTripsModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(DriverErrorCarTripsState());
+    });
+  }
+
+
 }
 
 
-
-//
-// StationModel? stationModel;
-// void getStationData() {
-//   DioHelper.getData(url: STATION).then((value) {
-//     station.clear();
-//     for (var item in value.data) {
-//       //print(item['id']);
-//       stationModel = StationModel.fromJson(item);
-//       stationnew.add(item);
-//       station.add(stationModel!.name.toString());
-//     }
-//     //StationModel stm1 =  StationModel.fromJson(stationnew[0]);
-//     //print(stm1.id);
-//
-//
-//     emit(AdminSuccessStationState(stationModel!));
-//   }).catchError((error) {
-//     print(error.toString());
-//     emit(AdminErrorStationState());
-//   });
-// }

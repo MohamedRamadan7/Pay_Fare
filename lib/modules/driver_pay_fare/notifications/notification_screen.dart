@@ -65,12 +65,13 @@ class DriverNotificationsScreen extends StatelessWidget {
                         radius: 30,
                         width: 180,
                         function: () {
-                          DriverCubit.get(context).getChairData();
-
+                         // DriverCubit.get(context).getChairData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
+                         // print(double.parse('${DriverCubit.get(context).driverModel!.amount}'));
                           //  navigateTo(context, widget);
+                          DriverCubit.get(context).RestChairs(id: int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
+                          //DriverCubit.get(context).getCarTripsData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
                         },
-                        text: ''
-                            'reset',
+                        text: 'reset',
                         isUberCase: true),
                   ),
                 ],
