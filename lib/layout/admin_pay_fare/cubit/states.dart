@@ -2,6 +2,8 @@
 
 import 'package:pay_fare/models/car_model/post_car_model.dart';
 import 'package:pay_fare/models/driver_model/post_driver_miodel.dart';
+import 'package:pay_fare/models/owner_model/add_driver_inqueue_model.dart';
+import 'package:pay_fare/models/owner_model/drivers_online_model.dart';
 import 'package:pay_fare/models/owner_model/owner_model.dart';
 import 'package:pay_fare/models/station_model.dart';
 import 'package:pay_fare/models/trafic_model/trafic_model.dart';
@@ -63,3 +65,48 @@ class AdminPostCarErrorState extends AdminStates {
   final String error;
   AdminPostCarErrorState(this.error);
 }
+
+
+class AdminSuccessDriverInQueueState extends AdminStates {
+  final AddDriverInQueueModel addDriverInQueueModel;
+
+  AdminSuccessDriverInQueueState(this.addDriverInQueueModel);
+}
+
+class AdminErrorDriverInQueueState extends AdminStates {
+  final String error;
+  AdminErrorDriverInQueueState(this.error);
+}
+
+class AdminSuccessAllQueueDataState extends AdminStates {
+  final AddDriverInQueueModel addDriverInQueueModel;
+
+  AdminSuccessAllQueueDataState(this.addDriverInQueueModel);
+}
+
+class AdminErrorAllQueueDataState extends AdminStates {
+  final String error;
+  AdminErrorAllQueueDataState(this.error);
+}
+
+class AdminSuccessRemoveFromQueueState extends AdminStates{}
+
+class AdminErrorRemoveFromQueueState extends AdminStates{}
+
+class AdminSuccessDriversOnlineState extends AdminStates {
+  final DriversOnlineModel driversOnlineModel;
+
+  AdminSuccessDriversOnlineState(this.driversOnlineModel);
+}
+
+class AdminErrorDriversOnlineState extends AdminStates {
+  final String error;
+  AdminErrorDriversOnlineState(this.error);
+}
+
+
+class AdminSuccessStatusState extends AdminStates{}
+
+class AdminErrorStatusState extends AdminStates{}
+
+

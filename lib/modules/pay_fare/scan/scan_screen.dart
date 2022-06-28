@@ -7,17 +7,25 @@ import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/modules/pay_fare/scan/ListViewPage.dart';
 import 'package:pay_fare/modules/qr/read_qr_screen.dart';
 import 'package:pay_fare/shared/components/components.dart';
+import 'package:pay_fare/shared/components/constants.dart';
 import 'package:pay_fare/shared/styles/colors.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class ScanScreen extends StatelessWidget {
   var ScanController = TextEditingController();
-  double amountToPay = 30.0;
+
 
   @override
   Widget build(BuildContext context) {
+
+    var Cubit =AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AppScanState)
+          {
+            AppCubit.get(context).getQrData();
+          }
+      },
       builder: (context, state) {
         return Scaffold(
           body: SingleChildScrollView(
@@ -108,7 +116,7 @@ class ScanScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '$amountToPay',
+                            '${Cubit.amountToPay}',
                             style: TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
@@ -134,11 +142,16 @@ class ScanScreen extends StatelessWidget {
                     child: defaultButton(
                         width: 200,
                         function: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ListViewPage(
-                                    amountToPay: amountToPay,
-                                  )));
-
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (context) => ListViewPage(
+                          //           amountToPay: amountToPay,
+                          //         )));
+                          AppCubit.get(context).putPayfare(
+                              clientId: int.parse('${AppCubit.get(context).userModel?.id}') ,
+                              carId:  int.parse('${AppCubit.get(context).qrModel!.carId}'),
+                              driverPhone: '${AppCubit.get(context).qrModel!.driverPhone}',
+                              amount: double.parse('${AppCubit.get(context).qrModel!.price}'),
+                              chair: [1]);
                         },
                         text: 'pay',
                         isUberCase: true),

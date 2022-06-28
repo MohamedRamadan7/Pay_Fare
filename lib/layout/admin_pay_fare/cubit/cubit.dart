@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/admin_pay_fare/cubit/states.dart';
 import 'package:pay_fare/models/car_model/post_car_model.dart';
+import 'package:pay_fare/models/driver_model/change_status_drive_model.dart';
 import 'package:pay_fare/models/driver_model/post_driver_miodel.dart';
+import 'package:pay_fare/models/owner_model/add_driver_inqueue_model.dart';
+import 'package:pay_fare/models/owner_model/drivers_online_model.dart';
 import 'package:pay_fare/models/owner_model/owner_model.dart';
+import 'package:pay_fare/models/owner_model/remove_from-queue-model.dart';
 import 'package:pay_fare/models/station_model.dart';
 import 'package:pay_fare/models/trafic_model/trafic_model.dart';
 import 'package:pay_fare/modules/admin_pay_fare/Arranging/admin_Arranging_screen.dart';
@@ -111,7 +115,6 @@ class AdminCubit extends Cubit<AdminStates> {
       }
       //StationModel stm1 =  StationModel.fromJson(stationnew[0]);
       //print(stm1.id);
-
 
       emit(AdminSuccessTrafficState(traficmodel!));
     }).catchError((error) {
@@ -227,6 +230,109 @@ class AdminCubit extends Cubit<AdminStates> {
 
       emit(AdminPostCarErrorState(error.toString()));
       print('error is = ${error.toString()}');
+    });
+  }
+
+
+  AddDriverInQueueModel? addDriverInQueueModel;
+  void PostDriverInQueue({
+    required String driver_code,
+  })
+  {
+    DioHelper.postData(url: ADDINQUEUE,
+        query:{
+          'driver_code':driver_code,
+        }
+    ).then((value){
+      print(value.data);
+      addDriverInQueueModel = AddDriverInQueueModel.fromJson(value.data);
+      emit(AdminSuccessDriverInQueueState(addDriverInQueueModel!));
+    }).catchError((error){
+
+      emit(AdminErrorDriverInQueueState(error.toString()));
+      print('error is = ${error.toString()}');
+    });
+
+  }
+
+  List <Map<String,dynamic>> AllDriverInQueue = [];
+  void getAllQueueData() {
+    DioHelper.getData(url: QUEUE).then((value) {
+      AllDriverInQueue.clear();
+      for (var item in value.data) {
+        //print(item['id']);
+       addDriverInQueueModel = AddDriverInQueueModel.fromJson(item);
+        AllDriverInQueue.add(item);
+      }
+      //print(AllDriverInQueue);
+      emit(AdminSuccessAllQueueDataState(addDriverInQueueModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(AdminErrorAllQueueDataState(error.toString()));
+    });
+  }
+
+
+  RemoveFromQueueModel? removeFromQueueModel;
+  void RemoveFromQueue({
+    required int adminId,
+  })
+  {
+    //emit(AppLoadingGrtDataState());
+    DioHelper.deleteData(url:DELETEFROMQUEUE, query: {
+      'adminId':adminId,
+
+    }
+    ).then((value) {
+      removeFromQueueModel = RemoveFromQueueModel.fromJson(value.data);
+      print(value.data);
+      emit(AdminSuccessRemoveFromQueueState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AdminErrorRemoveFromQueueState());
+    });
+  }
+
+
+  DriversOnlineModel? driversOnlineModel;
+  List <Map<String,dynamic>>  DriversOnline = [];
+  List <int> DriversID=[];
+  void getDriversOnline() {
+    DioHelper.getData(url: DRIVERSONLINE).then((value) {
+      DriversOnline.clear();
+      for (var item in value.data) {
+        //print(item['id']);
+        driversOnlineModel = DriversOnlineModel.fromJson(item);
+        DriversOnline.add(item);
+        DriversID.add(driversOnlineModel!.id!);
+      }
+      //print(DriversOnline);
+      emit(AdminSuccessDriversOnlineState(driversOnlineModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(AdminErrorDriversOnlineState(error.toString()));
+    });
+  }
+
+  DriverStatusModel? driverStatusModel;
+  void PutDriverStatus({
+    required int id,
+    required int value,
+  })
+  {
+    //emit(AppLoadingGrtDataState());
+    DioHelper.putData(url:DRIVERSTATUS,
+        query: {
+          'id':id,
+          'value':value,
+        }
+    ).then((value) {
+      driverStatusModel = DriverStatusModel.fromJson(value.data);
+      print(value.data);
+      emit(AdminSuccessStatusState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AdminErrorStatusState());
     });
   }
 

@@ -14,7 +14,7 @@ class DriverWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = DriverCubit.get(context);
-    double? balance = cubit.driverModel!.wallet = 0.0;
+    //double? balance = cubit.driverModel!.amount = 0.0;
     return BlocConsumer<DriverCubit,DriverStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -24,7 +24,7 @@ class DriverWalletScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BalanceCard(balance: balance),
+                  BalanceCard(balance: double.parse('${cubit.driverModel!.amount}')),
                   SizedBox(
                     height:50.0 ,),
                   Padding(

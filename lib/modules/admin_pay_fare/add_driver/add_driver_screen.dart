@@ -237,9 +237,10 @@ class AdminAddDriverScreen extends StatelessWidget {
                             AdminCubit.get(context).PostCar(
                                 carPlateNum: plateNumberController.text,
                                 carCapacity: carCapacityController.text,
-                                qrCode: plateNumberController.text);
-
+                                qrCode: plateNumberController.text
+                            );
                           },
+
                           text: 'Save',
                           isUberCase: false
                       ),

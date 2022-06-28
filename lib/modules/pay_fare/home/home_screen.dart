@@ -5,6 +5,7 @@ import 'package:pay_fare/layout/client_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/models/client_model/client_login_model.dart';
 import 'package:pay_fare/modules/pay_fare/wallet/balance_card.dart';
+import 'package:pay_fare/modules/qr/create_qr_screen.dart';
 import 'package:pay_fare/shared/components/components.dart';
 import 'package:pay_fare/shared/components/constants.dart';
 import 'package:pay_fare/shared/components/title_text.dart';
@@ -160,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      BalanceCard(balance: AppCubit.get(context).balance),
+                      BalanceCard(balance: double.parse('${AppCubit.get(context).userModel!.amount}')),
                       SizedBox(
                         height:30.0 ,),
                       Text('Transaction',
@@ -197,7 +198,7 @@ class HomeScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
-                                          Text('EGP 30 ',
+                                          Text('EGP ${cubit.price[1]} ',
                                             style: TextStyle(
                                               fontSize: 20.0,
                                               fontWeight: FontWeight.bold,
@@ -221,18 +222,19 @@ class HomeScreen extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
 
-                                          Text('25 Nov,',
+                                          Text('${cubit.date[1]}',
+                                            maxLines: 1 ,
                                             style: TextStyle(
                                               fontSize: 20.0,
                                               color: Colors.grey,
                                             ),
                                           ),
-                                          Text('2:30 pm ',
-                                            style: TextStyle(
-                                              fontSize: 20.0,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
+                                          // Text('',
+                                          //   style: TextStyle(
+                                          //     fontSize: 20.0,
+                                          //     color: Colors.grey,
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ],
@@ -292,7 +294,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 350,
                                 child: MaterialButton(
                                   onPressed: (){
-
+                                    AppCubit.get(context).getClientHistoryData();
                                   },
                                   child: Text('Sow more',
                                     style: TextStyle(
@@ -316,7 +318,7 @@ class HomeScreen extends StatelessWidget {
                                 child: MaterialButton(
                                   onPressed: ()
                                   {
-
+                                    navigateTo(context, CreateQrScreen());
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

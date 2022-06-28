@@ -11,7 +11,7 @@ class DriverHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = DriverCubit.get(context);
-    double? balance = cubit.driverModel!.wallet = 0.0;
+   // double? balance = double.parse('${cubit.driverModel!.amount }');
     return BlocConsumer<DriverCubit, DriverStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -134,7 +134,7 @@ class DriverHomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 20.0,
                 ),
-                BalanceCard(balance: balance),
+                BalanceCard(balance: double.parse('${cubit.driverModel!.amount}')),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -161,8 +161,12 @@ class DriverHomeScreen extends StatelessWidget {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    DriverCubit.get(context)
-                                        .ChangeActiveVisibility();
+                                    DriverCubit.get(context).ChangeActiveVisibility();
+                                    DriverCubit.get(context).PutDriverStatus(
+                                        id: int.parse('${DriverCubit.get(context).driverModel!.id}'),
+                                        value: DriverCubit.get(context).value
+                                    );
+
                                   },
                                   icon: Icon(
                                     DriverCubit.get(context).icon,

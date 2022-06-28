@@ -27,6 +27,7 @@ class ListViewPage extends StatelessWidget {
                   if(response.status==PaymentStatus.Success){
                     AppCubit.get(context).balance += amountToPay;
                     CacheHelper.saveData(key: 'balanceClient', value: AppCubit.get(context).balance);
+                    AppCubit.get(context).putWalletData(id: int.parse('${AppCubit.get(context).userModel!.id}'), funds: amountToPay);
                   }
                 },
                 request: MyfatoorahRequest.test(

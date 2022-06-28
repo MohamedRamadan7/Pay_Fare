@@ -29,6 +29,7 @@ class AppLoginScreen extends StatelessWidget {
               CacheHelper.saveData(key: 'clientId', value: state.loginModel.user!.id).then((value) {
                 clientId = CacheHelper.getData(key: 'clientId');
                 navigateAndFinish(context, AppLayout());
+
               });
             } else if (state.loginModel.user!.type!.id == 2) {
               //print(state.loginModel.user!.name);
@@ -39,6 +40,11 @@ class AppLoginScreen extends StatelessWidget {
 
                 });
             } else if (state.loginModel.user!.type!.id == 1) {
+              CacheHelper.saveData(key: 'adminId', value: state.loginModel.id).then((value) {
+                AdminId = CacheHelper.getData(key: 'adminId');
+                navigateAndFinish(context, AdminLayout());
+
+              });
               navigateAndFinish(context, AdminLayout());
             } else {
               print(state.loginModel.user!.id);

@@ -4,9 +4,12 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/models/car_model/get_chair_model.dart';
+import 'package:pay_fare/models/car_model/qr_code.dart';
+import 'package:pay_fare/models/client_model/client_history_model.dart';
 import 'package:pay_fare/models/client_model/client_login_model.dart';
 import 'package:pay_fare/models/client_model/client_send_balance_model.dart';
 import 'package:pay_fare/models/client_model/client_wallet_model.dart';
+import 'package:pay_fare/models/client_model/payfare_model.dart';
 import 'package:pay_fare/modules/pay_fare/help/help_screen.dart';
 import 'package:pay_fare/modules/pay_fare/home/home_screen.dart';
 import 'package:pay_fare/modules/pay_fare/profile/profile_screen.dart';
@@ -24,6 +27,8 @@ class AppCubit extends Cubit<AppStates> {
 
   var currentIndex = 0;
   late double balance ;
+  double amountToPay = 0.0 ;
+
   List<Widget> bottomScreen = [
     HomeScreen(),
     ScanScreen(),
@@ -94,6 +99,7 @@ class AppCubit extends Cubit<AppStates> {
       userModel = ClientLoginModel.fromJson(value.data);
       print(userModel!.user!.phone);
       emit(AppSuccessUserDataState(userModel!));
+      getClientHistoryData();
     }).catchError((error) {
       print(error.toString());
       emit(AppErrorUserDataState());
@@ -163,6 +169,85 @@ class AppCubit extends Cubit<AppStates> {
   //   });
   // }
 
+  QrModel? qrModel;
+  void getQrData() {
+    DioHelper.getData(url: QRCODE, query: {
+      'qrcode':'${qrstr}',
+    }).then((value) {
+      qrModel = QrModel.fromJson(value.data);
+      print(qrModel!.price);
+      emit(AppSuccessQrDataState(qrModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorQrDataState());
+    });
+  }
+
+  PayfareModel? payfareModel;
+
+  void putPayfare({
+    required int clientId,
+    required int carId,
+    required String driverPhone,
+    required double amount,
+    required List<dynamic> chair,
+
+  })
+  {
+    DioHelper.putPayfareData(url:PAYFARE,query: {
+      'clientId':clientId,
+      'carId':carId,
+      'driverPhone':driverPhone,
+      'amount':amount,
+
+    },
+      data: chair
+    ).then((value) {
+      payfareModel = PayfareModel.fromJson(value.data);
+      print(value.data);
+      emit(AppSuccessPayfareState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorPayfareState());
+    });
+  }
+
+  List<String> date = [];
+  List<String> price = [];
+
+
+  ClientRidesHistoryModel? clientRidesHistoryModel;
+  void getClientHistoryData() {
+    DioHelper.getData(url: CLIENTHISTORY,
+        query: {
+      'id':int.parse('${userModel!.id}')
+        }
+
+    ).then((value) {
+      date.clear();
+      price.clear();
+      for (var item in value.data) {
+        //print(item['id']);
+        clientRidesHistoryModel = ClientRidesHistoryModel.fromJson(item);
+        //stationnew.add(item);
+        date.add(clientRidesHistoryModel!.date.toString());
+        //print(date);
+        price.add(clientRidesHistoryModel!.amountPay.toString());
+        print(date);
+      }
+      //clientRidesHistoryModel stm1 =  ClientRidesHistoryModel.fromJson(stationnew[0]);
+      //print(stm1.id);
+      emit(AppSuccessClientHistoryState(clientRidesHistoryModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorClientHistoryState());
+    });
+  }
+
+  void Pay(index)
+  {
+    amountToPay= qrModel!.price! * index;
+  }
 
 }
 

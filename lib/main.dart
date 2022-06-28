@@ -8,7 +8,6 @@ import 'package:pay_fare/layout/driver_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/modules/pay_fare/onboarding/on_boarding.dart';
 import 'package:pay_fare/shared/components/constants.dart';
 import 'package:pay_fare/shared/styles/themes.dart';
-
 import 'shared/network/local/cache_helper.dart';
 import 'shared/network/remote/dio_helper.dart';
 
@@ -19,6 +18,7 @@ void main() async {
   await CacheHelper.init();
  clientId = CacheHelper.getData(key: 'clientId');
  DriverPhone = CacheHelper.getData(key: 'driverPhone');
+ AdminId = CacheHelper.getData(key: 'adminId');
 
 
   runApp(MyApp());
@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => AppCubit()..getUserData(),
         ),
         BlocProvider(
-          create: (BuildContext context) => DriverCubit()..getDriverData()..getChairData(),
+          create: (BuildContext context) => DriverCubit()..getDriverData()
         ),
         BlocProvider(
-          create: (BuildContext context) => AdminCubit()..getStationData()..getOwnerData()..getTrafficData(),
+          create: (BuildContext context) => AdminCubit()..getStationData()..getOwnerData()..getTrafficData()..getAllQueueData()..getDriversOnline(),
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(

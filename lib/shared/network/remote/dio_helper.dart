@@ -38,7 +38,7 @@ class DioHelper {
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
   }) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
@@ -66,4 +66,37 @@ class DioHelper {
       data: data,
     );
   }
+
+  static Future<Response> putPayfareData({
+    required String url,
+    List<dynamic>? data,
+    Map<String, dynamic>? query,
+  }) async {
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+    };
+
+    return dio.put(
+      url,
+      queryParameters: query,
+      data: data,
+    );
+  }
+
+  static Future<Response> deleteData({
+    required String url,
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? query,
+  }) async {
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+    };
+
+    return dio.delete(
+      url,
+      queryParameters: query,
+      data: data,
+    );
+  }
+
 }

@@ -1,23 +1,26 @@
-class GetDriverModel {
+class DriversOnlineModel {
   int? id;
   Car? car;
   String? driverCode;
+  int? status;
   User? user;
   String? liceNum;
   double? amount;
 
-  GetDriverModel(
+  DriversOnlineModel(
       {this.id,
-      this.car,
-      this.driverCode,
-      this.user,
-      this.liceNum,
-      this.amount});
+        this.car,
+        this.driverCode,
+        this.status,
+        this.user,
+        this.liceNum,
+        this.amount});
 
-  GetDriverModel.fromJson(Map<String, dynamic> json) {
+  DriversOnlineModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     car = json['car'] != null ? new Car.fromJson(json['car']) : null;
     driverCode = json['driverCode'];
+    status = json['status'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     liceNum = json['liceNum'];
     amount = json['amount'];
@@ -30,6 +33,7 @@ class GetDriverModel {
       data['car'] = this.car!.toJson();
     }
     data['driverCode'] = this.driverCode;
+    data['status'] = this.status;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
@@ -51,13 +55,13 @@ class Car {
 
   Car(
       {this.id,
-      this.carCode,
-      this.mainStation,
-      this.traffic,
-      this.owner,
-      this.carPlateNum,
-      this.carCapacity,
-      this.qrCode});
+        this.carCode,
+        this.mainStation,
+        this.traffic,
+        this.owner,
+        this.carPlateNum,
+        this.carCapacity,
+        this.qrCode});
 
   Car.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -66,7 +70,7 @@ class Car {
         ? new MainStation.fromJson(json['mainStation'])
         : null;
     traffic =
-        json['traffic'] != null ? new Traffic.fromJson(json['traffic']) : null;
+    json['traffic'] != null ? new Traffic.fromJson(json['traffic']) : null;
     owner = json['owner'] != null ? new Owner.fromJson(json['owner']) : null;
     carPlateNum = json['carPlateNum'];
     carCapacity = json['carCapacity'];

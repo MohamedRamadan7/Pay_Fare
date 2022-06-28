@@ -1,73 +1,15 @@
-// class ClientLoginModel
-// {
-//     int? id;
-//     double? wallet;
-//     UserData? data;
-//
-//     ClientLoginModel.fromJson(Map<String , dynamic> json)
-//     {
-//        id= json['id'];
-//        wallet= json['wallet'];
-//        data= json['data'] !=null ? UserData.fromJson(json['data']) : null;
-//
-//     }
-// }
-//
-// class UserData {
-//    int? id;
-//    String? name;
-//    String? username;
-//    String? phone;
-//    String? image;
-//    List<TypeData>? data=[];
-//
-//    // UserData({
-//    //    this.id,
-//    //    this.name,
-//    //    this.email,
-//    //    this.phone,
-//    //    this.image,
-//    //    this.points,
-//    //    this.credit,
-//    //    this.token,
-//    // });
-//
-//    UserData.fromJson(Map<String, dynamic> json)
-//    {
-//       id = json['id'];
-//       name = json['name'];
-//       username = json['username'];
-//       phone = json['phone'];
-//       image = json['image'];
-//       json['data'].forEach((element)
-//       {
-//         data!.add(TypeData.fromJson(element));
-//       });
-//    }
-// }
-// class TypeData
-// {
-//   int? id ;
-//   String? name ;
-//   TypeData.fromJson(Map<String , dynamic>json)
-//   {
-//     id =json['id'];
-//     name =json['name'];
-//   }
-// }
-
 
 class ClientLoginModel {
   int? id;
   UserData? user;
-  double? wallet;
+  double? amount;
 
-  ClientLoginModel({this.id, this.user, this.wallet});
+  ClientLoginModel({this.id, this.user, this.amount});
 
   ClientLoginModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'] != null ? new UserData.fromJson(json['user']) : null;
-    wallet = json['amount'];
+    amount = json['amount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -76,7 +18,7 @@ class ClientLoginModel {
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
-    data['wallet'] = this.wallet;
+    data['amount'] = this.amount;
     return data;
   }
 }

@@ -24,7 +24,7 @@ class WalletScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    BalanceCard(balance: AppCubit.get(context).balance),
+                    BalanceCard(balance:double.parse('${AppCubit.get(context).userModel!.amount}')),
                     SizedBox(
                       height:50.0 ,),
                     Padding(
