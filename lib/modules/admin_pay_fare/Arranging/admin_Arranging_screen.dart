@@ -85,16 +85,28 @@ class AdminArrangingScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 15.0),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
+            child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:
                 [
-                  Text('Car Id: ${AdminCubit.get(context).DriversOnline[index]['car']['id']} ',
+                  Text(' ${AdminCubit.get(context).DriversOnline[index]['user']['name']} ',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
+
+                      color: Colors.black,
+                      // fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(width: 8,),
+                  Text('Car Id: ${AdminCubit.get(context).DriversOnline[index]['car']['carPlateNum']} ',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14.0,
                       fontWeight: FontWeight.w600,
 
                       color: Colors.black,

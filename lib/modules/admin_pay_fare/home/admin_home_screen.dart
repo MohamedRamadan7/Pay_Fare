@@ -49,7 +49,7 @@ class AdminHomeScreen extends StatelessWidget {
                   numberDrivers> 0? ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => buildActiveDriver(context,index),
+                      itemBuilder: (context, index) => bildChatItem(context,index),
                       separatorBuilder: (context, index) =>SizedBox(
                         height: 20,
                       ),
@@ -108,7 +108,7 @@ class AdminHomeScreen extends StatelessWidget {
                   SizedBox(
                     width: 10.0,
                   ),
-                  Text('${AdminCubit.get(context).AllDriverInQueue[index]['driverCode']}',
+                  Text('${AdminCubit.get(context).AllDriverInQueue[index]['driverName']}',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
@@ -139,6 +139,90 @@ class AdminHomeScreen extends StatelessWidget {
              width: 2),
         borderRadius: BorderRadius.circular(20.0,),
       ),
+    ),
+  );
+
+  Widget bildChatItem(context,index) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal:10.0),
+    child: Row(
+      children: [
+        Stack(
+          alignment: AlignmentDirectional.bottomEnd,
+          children: [
+            CircleAvatar(
+              radius: 25.0,
+              backgroundImage: NetworkImage(AdminCubit.get(context).images[index]),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(
+                start: 3.0,
+                bottom: 3.0,
+              ),
+              child: CircleAvatar(
+                radius: 6.0,
+                backgroundColor: Colors.green,
+
+              ),
+            ),
+
+          ],
+        ),
+        SizedBox(
+          width: 20.0,
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${AdminCubit.get(context).AllDriverInQueue[index]['driverName']}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Spacer(),
+              Text(
+                'Car Id: ${AdminCubit.get(context).AllDriverInQueue[index]['carPlateNum']} ',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(width: 20,)
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: Text(
+              //         'hello my name is mohamed',
+              //         maxLines: 2,
+              //         overflow: TextOverflow.ellipsis,
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //       child: Container(
+              //         width: 7.0,
+              //         height: 7.0,
+              //         decoration: BoxDecoration(
+              //           color: Colors.blue,
+              //           shape: BoxShape.circle,
+              //         ),
+              //       ),
+              //     ),
+              //     Text(
+              //         '02:00pm'),
+              //   ],
+              // )
+
+            ],
+          ),
+        )
+      ],
     ),
   );
 

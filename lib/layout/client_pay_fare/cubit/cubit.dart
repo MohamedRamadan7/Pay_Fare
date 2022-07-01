@@ -49,28 +49,90 @@ class AppCubit extends Cubit<AppStates> {
     currentIndex = index;
     emit(AppChangeBottomNaveState());
   }
+late List chairListTest =[
 
-  late Map<int, bool> colorChair = {
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false,
-    8: false,
-    9: false,
-    10: false,
-    11: false,
-    12: false,
-    13: false,
-  };
+  {
+    "index":0,
+    "check":false,
+    "booked":false
+  },{
+    "index":1,
+    "check":false,
+    "booked":false
+  },{
+    "index":2,
+    "check":false,
+    "booked":false
+  },{
+    "index":3,
+    "check":false,
+    "booked":false
+  },{
+    "index":4,
+    "check":false,
+    "booked":false
+  },{
+    "index":5,
+    "check":false,
+    "booked":false
+  },{
+    "index":6,
+    "check":false,
+    "booked":false
+  },{
+    "index":7,
+    "check":false,
+    "booked":false
+  },{
+    "index":8,
+    "check":false,
+    "booked":false
+  },{
+    "index":9,
+    "check":false,
+    "booked":false
+  },{
+    "index":10,
+    "check":false,
+    "booked":false
+  },{
+    "index":11,
+    "check":false,
+    "booked":false
+  },{
+    "index":12,
+    "check":false,
+    "booked":false
+  },{
+    "index":13,
+    "check":false,
+    "booked":false
+  },
+];
+  // late Map<int, bool> colorChair = {
+  //   0: false,
+  //   1: false,
+  //   2: false,
+  //   3: false,
+  //   4: false,
+  //   5: false,
+  //   6: false,
+  //   7: false,
+  //   8: false,
+  //   9: false,
+  //   10: false,
+  //   11: false,
+  //   12: false,
+  //   13: false,
+  // };
   void changeChair(int index) {
-    colorChair[index] = !colorChair[index]!;
+
+    // colorChair[index] = !colorChair[index]!;
+    chairListTest[index]['check'] = !chairListTest[index]['check'];
+    amountToPay +=chairListTest[index]['check']?qrModel!.price!:-qrModel!.price!;
     //colorChair.update(index, (value) => !value);
     //CacheHelper.saveData(key: 'chair', value:colorChair[index] );
-    CacheHelper.saveData(key: 'chair', value: colorChair[index]!).then((value) {
+    CacheHelper.saveData(key: 'chair', value: chairListTest[index]['check']).then((value) {
       emit(AppChangeChairStaState());
     });
   }
@@ -176,6 +238,7 @@ class AppCubit extends Cubit<AppStates> {
     }).then((value) {
       qrModel = QrModel.fromJson(value.data);
       print(qrModel!.price);
+      getChairData(qrModel!.carId!);
       emit(AppSuccessQrDataState(qrModel!));
     }).catchError((error) {
       print(error.toString());
@@ -194,6 +257,7 @@ class AppCubit extends Cubit<AppStates> {
 
   })
   {
+    emit(AppLoadingPayfareState());
     DioHelper.putPayfareData(url:PAYFARE,query: {
       'clientId':clientId,
       'carId':carId,
@@ -203,8 +267,10 @@ class AppCubit extends Cubit<AppStates> {
     },
       data: chair
     ).then((value) {
+
       payfareModel = PayfareModel.fromJson(value.data);
       print(value.data);
+      amountToPay=0;
       emit(AppSuccessPayfareState());
     }).catchError((error) {
       print(error.toString());
@@ -233,7 +299,7 @@ class AppCubit extends Cubit<AppStates> {
         date.add(clientRidesHistoryModel!.date.toString());
         //print(date);
         price.add(clientRidesHistoryModel!.amountPay.toString());
-        print(date);
+        //print(date);
       }
       //clientRidesHistoryModel stm1 =  ClientRidesHistoryModel.fromJson(stationnew[0]);
       //print(stm1.id);
@@ -244,6 +310,38 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  GetChair? chairModel;
+  List <Map<String,dynamic>> chair=[];
+  void getChairData(int carid) {
+    DioHelper.getData(url: GETCHAIR, query: {
+      'id':carid,
+    }).then((value) {
+      //chairModel = GetChair.fromJson(value.data);
+      for (var item in value.data) {
+        //print(item['id']);
+        chairModel = GetChair.fromJson(item);
+        // colorChair.update(13 - chairModel!.chairNumber!, (value) => chairModel!.status==1?true:false);
+        chairListTest[chairModel!.chairNumber!-1]['booked']=chairModel!.status==1?true:false;
+        print("staaaaaate ${chairListTest[chairModel!.chairNumber!-1]['booked']}");
+
+        chair.add(item);
+      }
+      GetChair stm1 =  GetChair.fromJson(chair[5]);
+      // for(var item in chair)
+      //   {
+      //     print(item['status']);
+      //   }
+
+
+      // print(chairModel!.status);
+      emit(AppSuccessgetChairDataState(chairModel!));
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorgetChairDataState());
+    });
+  }
+
+List<int> chairs=[];
   void Pay(index)
   {
     amountToPay= qrModel!.price! * index;

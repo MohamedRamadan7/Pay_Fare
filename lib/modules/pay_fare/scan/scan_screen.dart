@@ -139,22 +139,38 @@ class ScanScreen extends StatelessWidget {
                     height: 40.0,
                   ),
                   Center(
-                    child: defaultButton(
+                    child:
+                        state is !AppLoadingPayfareState?
+                    defaultButton(
                         width: 200,
                         function: () {
+                          List givenChairs =[];
+                          AppCubit.get(context).chairListTest.forEach((element) {
+                            print(element['booked']?"${element['index']} is checked":"not");
+                            if(element['check']&&!element['booked']) givenChairs.add(14-element['index']);
+
+                          });
+                          // AppCubit.get(context).colorChair.forEach((key, value) {
+                          //   print(key);
+                          //   if(value) givenChairs.add(14-key);
+                          // });
                           // Navigator.of(context).push(MaterialPageRoute(
                           //     builder: (context) => ListViewPage(
                           //           amountToPay: amountToPay,
                           //         )));
+                          print(givenChairs);
                           AppCubit.get(context).putPayfare(
                               clientId: int.parse('${AppCubit.get(context).userModel?.id}') ,
                               carId:  int.parse('${AppCubit.get(context).qrModel!.carId}'),
                               driverPhone: '${AppCubit.get(context).qrModel!.driverPhone}',
-                              amount: double.parse('${AppCubit.get(context).qrModel!.price}'),
-                              chair: [1]);
+                              amount: double.parse('${AppCubit.get(context).qrModel!.price! * givenChairs.length}'),
+                              chair: givenChairs.reversed.toList());
+
+
+
                         },
                         text: 'pay',
-                        isUberCase: true),
+                        isUberCase: true):Center(child: CircularProgressIndicator()),
                   ),
                 ],
               ),
@@ -169,21 +185,32 @@ class ScanScreen extends StatelessWidget {
         //color:defaultColor,
         child: Column(
           children: [
+            !AppCubit.get(context).chairListTest[13-index]['booked']?
             InkWell(
+
               onTap: () {
-                print(index);
-                AppCubit.get(context).changeChair(index);
-                print(AppCubit.get(context).colorChair[index]);
+
+                 AppCubit.get(context).changeChair(index);
+                // for (var item; item<3 ; item++ )
+                // {
+                //   AppCubit.get(context).chairs.add(index);
+                // }
+                // print(AppCubit.get(context).chairs);
+                 AppCubit.get(context).chair[index]['status'];
               },
               child: Image.asset(
                 'assets/images/car.png',
                 height: 50,
                 width: double.infinity,
-                color: AppCubit.get(context).colorChair[index]!
-                    ? Colors.green
-                    : Colors.grey[600],
+                color: AppCubit.get(context).chairListTest[index]['check']||AppCubit.get(context).chairListTest[13-index]['booked']! ? Colors.green : Colors.grey[600],
               ),
-            ),
+            ):Image.asset(
+              'assets/images/car.png',
+              height: 50,
+              width: double.infinity,
+              color: AppCubit.get(context).chairListTest[index]['check']||AppCubit.get(context).chairListTest[13-index]['booked']! ? Colors.red : Colors.grey[600],
+            )
+            ,
             Text('chair ${14 - index}'),
           ],
         ),

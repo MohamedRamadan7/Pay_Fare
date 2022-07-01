@@ -60,4 +60,11 @@ class AppSuccessClientHistoryState extends AppStates {
 }
 
 class AppErrorClientHistoryState extends AppStates {}
+class AppLoadingPayfareState extends AppStates {}
 
+class AppSuccessgetChairDataState extends AppStates {
+  final GetChair chairModel;
+  AppSuccessgetChairDataState(this.chairModel);
+}
+
+class AppErrorgetChairDataState extends AppStates {}

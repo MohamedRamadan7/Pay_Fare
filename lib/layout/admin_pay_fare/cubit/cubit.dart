@@ -335,5 +335,15 @@ class AdminCubit extends Cubit<AdminStates> {
       emit(AdminErrorStatusState());
     });
   }
+  List<String> images=[
+    'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-blue-shirt-clothes-fashion-man-posing_158538-4976.jpg?t=st=1656436994~exp=1656437594~hmac=111888a230516604ecfef03bb5d10bb262fd0fc48b34061a8b4e65b55b29bfcc&w=740',
+    'https://img.freepik.com/free-photo/portrait-handsome-young-man-makes-okay-gesture-demonstrates-agreement-likes-idea-smiles-happily-wears-optical-glasses-yellow-hat-t-shirt-models-indoor-its-fine-thank-you-hand-sign_273609-30676.jpg?t=st=1656436994~exp=1656437594~hmac=d8a4af4705a65dfa3d1853498dc783f3c449ff94e27731085fe19d3dc9eeb07c&w=740',
+     'https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1656433434~exp=1656434034~hmac=a4309cb60dd6faa6555d45f3907ebb33e4ec7e635a5aaa7e28e0b1296ac7eab4&w=740',
+    'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-hipster-lumbersexual-businessman-model-man-dressed-jeans-jacket-clothes_158538-1733.jpg?t=st=1656436994~exp=1656437594~hmac=b341001ddc25110aa37e4a4ae18684e3f040543bfc7395daff11050a5e1a2476&w=740',
+    'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-young-man-model-dressed-blue-shirt-clothes-fashion-man-posing_158538-4976.jpg?t=st=1656436994~exp=1656437594~hmac=111888a230516604ecfef03bb5d10bb262fd0fc48b34061a8b4e65b55b29bfcc&w=740',
+    'https://img.freepik.com/free-photo/portrait-handsome-young-man-makes-okay-gesture-demonstrates-agreement-likes-idea-smiles-happily-wears-optical-glasses-yellow-hat-t-shirt-models-indoor-its-fine-thank-you-hand-sign_273609-30676.jpg?t=st=1656436994~exp=1656437594~hmac=d8a4af4705a65dfa3d1853498dc783f3c449ff94e27731085fe19d3dc9eeb07c&w=740',
+    'https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1656433434~exp=1656434034~hmac=a4309cb60dd6faa6555d45f3907ebb33e4ec7e635a5aaa7e28e0b1296ac7eab4&w=740',
+    'https://img.freepik.com/free-photo/portrait-handsome-smiling-stylish-hipster-lumbersexual-businessman-model-man-dressed-jeans-jacket-clothes_158538-1733.jpg?t=st=1656436994~exp=1656437594~hmac=b341001ddc25110aa37e4a4ae18684e3f040543bfc7395daff11050a5e1a2476&w=740',
+  ];
 
 }
