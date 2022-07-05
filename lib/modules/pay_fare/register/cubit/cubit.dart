@@ -18,32 +18,7 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
   AppRegisterCubit() : super(AppRegisterInitialState());
   static AppRegisterCubit get(context)=> BlocProvider.of(context);
 
-//   void userRegister({
-//   required String email,
-//   required String password,
-//     required String name,
-//     required String phone,
-// })
-//   {
-//     emit(AppRegisterLoadingState());
-//
-//     FirebaseAuth.instance.createUserWithEmailAndPassword(
-//         email: email,
-//         password: password
-//     ).then((value) {
-//       print(value.user!.email);
-//       print(value.user!.uid);
-//       userCreate(
-//           uId:value.user!.uid,
-//           name: name,
-//           email:email ,
-//           phone: phone,
-//       );
-//     }).catchError((error){
-//       emit(AppRegisterErrorState(error.toString()));
-//
-//     });
-//   }
+
 
   ClientRegisterModel? registerModel;
   void userRegister({
@@ -78,7 +53,6 @@ class AppRegisterCubit extends Cubit<AppRegisterStates>
 
   String verificationId= '';
   PhoneAuthCredential? credential ;
-// test
 
   Future<void> submitPhoneNumber(String phoneNumber) async {
     emit(Loading());

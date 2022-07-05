@@ -16,6 +16,8 @@ class DriverErrorChangeChairState extends DriverStates {}
 
 class DriverChangeActiveVisibilityState extends DriverStates {}
 
+class DriverLoadingDriverDataState extends DriverStates {}
+
 class DriverSuccessDriverDataState extends DriverStates {
   final GetDriverModel driverModel;
   DriverSuccessDriverDataState(this.driverModel);
@@ -44,3 +46,8 @@ class DriverSuccessCarTripsState extends DriverStates {
 }
 
 class DriverErrorCarTripsState extends DriverStates {}
+
+class DriverLoadingDriverRoleState extends DriverStates {}
+class DriverSuccessDriverRoleState extends DriverStates {}
+
+class DriverErrorDriverRoleState extends DriverStates {}

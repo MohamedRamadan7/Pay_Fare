@@ -145,29 +145,29 @@ class AdminCubit extends Cubit<AdminStates> {
 
   List pricies = [
     {
-      "cityfrom": "mansoura",
-      "cityto": "cairo",
-      "price": 10,
+      "cityfrom": "المنصوره",
+      "cityto": "القاهرة",
+      "price": 20,
     },
     {
-      "cityfrom": "mansoura",
-      "cityto": "Alex",
+      "cityfrom": "المنصوره",
+      "cityto": "الاسكندرية",
+      "price": 25,
+    },
+    {
+      "cityfrom": "المنصوره",
+      "cityto": "طنطا",
+      "price": 15,
+    },
+    {
+      "cityfrom": "المنصوره",
+      "cityto": "Giza",
       "price": 22,
     },
     {
-      "cityfrom": "mansoura",
-      "cityto": "tanta",
-      "price": 33,
-    },
-    {
-      "cityfrom": "mansoura",
-      "cityto": "Giza",
-      "price": 44,
-    },
-    {
-      "cityfrom": "mansoura",
-      "cityto": "6 octobar",
-      "price": 38,
+      "cityfrom": "المنصوره",
+      "cityto": "مطروح",
+      "price": 55,
     },
   ];
 
@@ -185,7 +185,7 @@ class AdminCubit extends Cubit<AdminStates> {
     required String liceNum,
   })
   {
-
+    emit(AdminPostDriverLoadingState());
     DioHelper.postData(url: POSTDRIVER,
         data:{
           'liceNum':liceNum,
@@ -298,6 +298,8 @@ class AdminCubit extends Cubit<AdminStates> {
   List <Map<String,dynamic>>  DriversOnline = [];
   List <int> DriversID=[];
   void getDriversOnline() {
+
+    emit(AdminLoadingDriversOnlineState());
     DioHelper.getData(url: DRIVERSONLINE).then((value) {
       DriversOnline.clear();
       for (var item in value.data) {

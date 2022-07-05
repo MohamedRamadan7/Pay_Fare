@@ -32,6 +32,7 @@ class AppLoginCubit extends Cubit<AppLoginStates>
      // print(value.data);
       loginModel = ClientLoginModel.fromJson(value.data);
       print('data is : ${loginModel!.user!.type!.name}');
+
       emit(AppLoginSuccessState(loginModel!));
     }
     ).catchError((error){
@@ -39,18 +40,6 @@ class AppLoginCubit extends Cubit<AppLoginStates>
       print('errorrrrrrrrrrrrrrrrrrr');
     });
 
-    // FirebaseAuth.instance.signInWithEmailAndPassword(
-    //     email: phone,
-    //     password: password
-    // ).then((value) {
-    //   print(value.user!.email);
-    //   print(value.user!.uid);
-    //   emit(AppLoginSuccessState());
-    // }).catchError((error){
-    //
-    //   emit(AppLoginErrorState(error.toString()));
-    //   print('error is = ${error.toString()}');
-    // });
   }
   IconData suffix= Icons.visibility;
   bool isPassword=true;

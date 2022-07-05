@@ -146,8 +146,10 @@ class ScanScreen extends StatelessWidget {
                         function: () {
                           List givenChairs =[];
                           AppCubit.get(context).chairListTest.forEach((element) {
-                            print(element['booked']?"${element['index']} is checked":"not");
-                            if(element['check']&&!element['booked']) givenChairs.add(14-element['index']);
+                            print(element['check']?"${element['index']} is check":"not checked");
+                           // print(element['booked']?"${element['index']} is booked":"not booked");
+
+                            if(element['check']&&!element['booked']) givenChairs.add(element['index']+1);
 
                           });
                           // AppCubit.get(context).colorChair.forEach((key, value) {
@@ -189,7 +191,6 @@ class ScanScreen extends StatelessWidget {
             InkWell(
 
               onTap: () {
-
                  AppCubit.get(context).changeChair(index);
                 // for (var item; item<3 ; item++ )
                 // {
@@ -202,13 +203,13 @@ class ScanScreen extends StatelessWidget {
                 'assets/images/car.png',
                 height: 50,
                 width: double.infinity,
-                color: AppCubit.get(context).chairListTest[index]['check']||AppCubit.get(context).chairListTest[13-index]['booked']! ? Colors.green : Colors.grey[600],
+                color: AppCubit.get(context).chairListTest[13-index]['check']||AppCubit.get(context).chairListTest[13-index]['booked']! ? Colors.green : Colors.grey[600],
               ),
             ):Image.asset(
               'assets/images/car.png',
               height: 50,
               width: double.infinity,
-              color: AppCubit.get(context).chairListTest[index]['check']||AppCubit.get(context).chairListTest[13-index]['booked']! ? Colors.red : Colors.grey[600],
+              color: AppCubit.get(context).chairListTest[13-index]['check']||AppCubit.get(context).chairListTest[13-index]['booked']! ? Colors.red : Colors.grey[600],
             )
             ,
             Text('chair ${14 - index}'),

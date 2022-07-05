@@ -21,8 +21,7 @@ const ADDINQUEUE= 'add-to-queue';
 const QUEUE= 'queue';
 const DELETEFROMQUEUE= 'delete-top';
 const DRIVERSONLINE= 'online-driver';
-
-
+const DRIVERSROLE= 'driver/NumInQueue';
 
 
 

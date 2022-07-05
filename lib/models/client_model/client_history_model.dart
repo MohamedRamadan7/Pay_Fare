@@ -4,6 +4,8 @@ class ClientRidesHistoryModel {
   String? driverPhone;
   double? amountPay;
   String? date;
+  String? from;
+  String? to;
 
   ClientRidesHistoryModel(
       {this.id, this.carPlateNum, this.driverPhone, this.amountPay, this.date});
@@ -14,6 +16,8 @@ class ClientRidesHistoryModel {
     driverPhone = json['driverPhone'];
     amountPay = json['amountPay'];
     date = json['date'];
+    from = json['from'];
+    to = json['to'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +27,8 @@ class ClientRidesHistoryModel {
     data['driverPhone'] = this.driverPhone;
     data['amountPay'] = this.amountPay;
     data['date'] = this.date;
+    data['from'] = this.from;
+    data['to'] = this.to;
     return data;
   }
 }

@@ -49,7 +49,7 @@ class AppCubit extends Cubit<AppStates> {
     currentIndex = index;
     emit(AppChangeBottomNaveState());
   }
-late List chairListTest =[
+late List chairListTest = [
 
   {
     "index":0,
@@ -128,8 +128,12 @@ late List chairListTest =[
   void changeChair(int index) {
 
     // colorChair[index] = !colorChair[index]!;
-    chairListTest[index]['check'] = !chairListTest[index]['check'];
-    amountToPay +=chairListTest[index]['check']?qrModel!.price!:-qrModel!.price!;
+    chairListTest[13-index]['check'] = !chairListTest[13-index]['check']!;
+
+    // for(var item in chairListTest){
+    //   print(item['check']);
+    // }
+    amountToPay +=chairListTest[13-index]['check']?qrModel!.price!:-qrModel!.price!;
     //colorChair.update(index, (value) => !value);
     //CacheHelper.saveData(key: 'chair', value:colorChair[index] );
     CacheHelper.saveData(key: 'chair', value: chairListTest[index]['check']).then((value) {
@@ -156,7 +160,7 @@ late List chairListTest =[
   void getUserData() {
     //emit(AppLoadingGrtDataState());
     DioHelper.getData(url: PROFILE, query: {
-      'id':'${clientId}',
+      'id':'${CacheHelper.getData(key: 'clientId')}',
     }).then((value) {
       userModel = ClientLoginModel.fromJson(value.data);
       print(userModel!.user!.phone);
@@ -197,7 +201,7 @@ late List chairListTest =[
     required double amount,
   })
   {
-    //emit(AppLoadingGrtDataState());
+    emit(AppLoadingSendBalanceState());
     DioHelper.putData(url:SENDAMOUNT,query: {
       'id':id,
       'phone':phone,
@@ -271,6 +275,7 @@ late List chairListTest =[
       payfareModel = PayfareModel.fromJson(value.data);
       print(value.data);
       amountToPay=0;
+      getChairData(qrModel!.carId!);
       emit(AppSuccessPayfareState());
     }).catchError((error) {
       print(error.toString());
@@ -280,10 +285,12 @@ late List chairListTest =[
 
   List<String> date = [];
   List<String> price = [];
-
+  List<String> from = [];
+  List<String> to = [];
 
   ClientRidesHistoryModel? clientRidesHistoryModel;
   void getClientHistoryData() {
+
     DioHelper.getData(url: CLIENTHISTORY,
         query: {
       'id':int.parse('${userModel!.id}')
@@ -292,6 +299,9 @@ late List chairListTest =[
     ).then((value) {
       date.clear();
       price.clear();
+      from.clear();
+      to.clear();
+
       for (var item in value.data) {
         //print(item['id']);
         clientRidesHistoryModel = ClientRidesHistoryModel.fromJson(item);
@@ -299,6 +309,8 @@ late List chairListTest =[
         date.add(clientRidesHistoryModel!.date.toString());
         //print(date);
         price.add(clientRidesHistoryModel!.amountPay.toString());
+        from.add(clientRidesHistoryModel!.from.toString());
+        to.add(clientRidesHistoryModel!.to.toString());
         //print(date);
       }
       //clientRidesHistoryModel stm1 =  ClientRidesHistoryModel.fromJson(stationnew[0]);

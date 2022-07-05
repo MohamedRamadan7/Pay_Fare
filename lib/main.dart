@@ -5,24 +5,32 @@ import 'package:pay_fare/layout/admin_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/layout/driver_pay_fare/cubit/cubit.dart';
+import 'package:pay_fare/modules/pay_fare/login/cubit/cubit.dart';
 import 'package:pay_fare/modules/pay_fare/onboarding/on_boarding.dart';
+import 'package:pay_fare/modules/pay_fare/register/cubit/cubit.dart';
 import 'package:pay_fare/shared/components/constants.dart';
+import 'package:pay_fare/shared/components/cubitObserver.dart';
 import 'package:pay_fare/shared/styles/themes.dart';
 import 'shared/network/local/cache_helper.dart';
 import 'shared/network/remote/dio_helper.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  DioHelper.init();
-  await CacheHelper.init();
- clientId = CacheHelper.getData(key: 'clientId');
- DriverPhone = CacheHelper.getData(key: 'driverPhone');
- AdminId = CacheHelper.getData(key: 'adminId');
+  BlocOverrides.runZoned(
+        () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
+      DioHelper.init();
+      await CacheHelper.init();
+      clientId = CacheHelper.getData(key: 'clientId');
+      DriverPhone = CacheHelper.getData(key: 'driverPhone');
+      AdminId = CacheHelper.getData(key: 'adminId');
+      runApp(MyApp());
+
+    },
+    blocObserver: MyBlocObserver(),
+  );
 
 
-  runApp(MyApp());
-  //
 }
 
 class MyApp extends StatelessWidget {
@@ -32,13 +40,19 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppCubit()..getUserData(),
+            create: (BuildContext context) => AppLoginCubit()
+        ),
+        BlocProvider(
+            create: (BuildContext context) => AppRegisterCubit()
         ),
         BlocProvider(
           create: (BuildContext context) => DriverCubit()..getDriverData()
         ),
         BlocProvider(
           create: (BuildContext context) => AdminCubit()..getStationData()..getOwnerData()..getTrafficData()..getAllQueueData()..getDriversOnline(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => AppCubit()..getUserData(),
         ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
