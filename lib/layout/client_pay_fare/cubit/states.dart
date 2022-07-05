@@ -39,6 +39,8 @@ class AppSuccessWalletDataState extends AppStates {}
 class AppErrorWalletDataState extends AppStates {}
 
 
+class AppLoadingSendBalanceState extends AppStates {}
+
 class AppSuccessSendBalanceState extends AppStates {}
 
 class AppErrorSendBalanceState extends AppStates {}

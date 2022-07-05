@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pay_fare/layout/client_pay_fare/app_layout.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/cubit.dart';
 import 'package:pay_fare/layout/client_pay_fare/cubit/states.dart';
 import 'package:pay_fare/modules/pay_fare/scan/ListViewPage.dart';
 import 'package:pay_fare/shared/components/components.dart';
+import 'package:pay_fare/shared/network/local/cache_helper.dart';
 class SendCreditScreen extends StatelessWidget {
   const  SendCreditScreen({Key? key}) : super(key: key);
 
@@ -42,7 +44,7 @@ class SendCreditScreen extends StatelessWidget {
                   height: 30,
                 ),
                 defaultFormFiled(
-                  controller: fundsController,
+                  controller: numberController,
                   type: TextInputType.number,
                   validation: (String value) {
                     if (value.isEmpty) {
@@ -56,12 +58,13 @@ class SendCreditScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                defaultButton(
+              state is !AppLoadingSendBalanceState?  defaultButton(
                     radius: 30,
                     function: () {
-                      navigateTo(context,ListViewPage(amountToPay: double.parse(numberController.text)));
+                      AppCubit.get(context).putSendBalanceData(id: 10, phone: '${numberController.text}', amount: double.parse(fundsController.text));
+
                     },
-                    text: 'Next')
+                    text: 'Next'):Center(child: CircularProgressIndicator())
               ],
             ),
           ),

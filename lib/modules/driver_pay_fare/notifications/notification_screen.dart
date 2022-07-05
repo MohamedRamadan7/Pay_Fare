@@ -45,7 +45,7 @@ class DriverNotificationsScreen extends StatelessWidget {
                         reverse: true,
                         mainAxisSpacing: 1.0,
                         crossAxisSpacing: 1.0,
-                        childAspectRatio: 1 / 0.6,
+                        childAspectRatio: 1 / 0.7,
                         children: List.generate(
                           14,
                           (index) => buildGridProducts(index, context),
@@ -65,11 +65,12 @@ class DriverNotificationsScreen extends StatelessWidget {
                         radius: 30,
                         width: 180,
                         function: () {
-                         // DriverCubit.get(context).getChairData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
+                          DriverCubit.get(context).chair.clear();
+                         DriverCubit.get(context).getChairData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
                          // print(double.parse('${DriverCubit.get(context).driverModel!.amount}'));
                           //  navigateTo(context, widget);
                           DriverCubit.get(context).RestChairs(id: int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
-                          //DriverCubit.get(context).getCarTripsData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
+                          DriverCubit.get(context).getCarTripsData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
                         },
                         text: 'reset',
                         isUberCase: true),
@@ -91,7 +92,7 @@ class DriverNotificationsScreen extends StatelessWidget {
               'assets/images/car.png',
               height: 50,
               width: double.infinity,
-              color: DriverCubit.get(context).chair[index]['status'] ==1 ? Colors.green : Colors.grey[600],
+              color: DriverCubit.get(context).chair[13-index]['status'] ==1 ? Colors.green : Colors.grey[600],
             ),
             Text('chair ${14 - index}'),
           ],

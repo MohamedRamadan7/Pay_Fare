@@ -4,6 +4,7 @@ import 'package:pay_fare/layout/driver_pay_fare/cubit/states.dart';
 import 'package:pay_fare/models/car_model/car_trips_model.dart';
 import 'package:pay_fare/models/car_model/get_chair_model.dart';
 import 'package:pay_fare/models/driver_model/change_status_drive_model.dart';
+import 'package:pay_fare/models/driver_model/drivers_role_model.dart';
 import 'package:pay_fare/models/driver_model/get_driver_model.dart';
 import 'package:pay_fare/models/driver_model/rest_chairs_model.dart';
 import 'package:pay_fare/modules/driver_pay_fare/archive/driver_archive_screen.dart';
@@ -80,14 +81,15 @@ class DriverCubit extends Cubit<DriverStates> {
 
   GetDriverModel? driverModel;
   void getDriverData()  {
-    //emit(AppLoadingGrtDataState());
+    emit(DriverLoadingDriverDataState());
      DioHelper.getData(url: GETDRIVER, query: {
-      'phone': '${DriverPhone}',
+      'phone': '${CacheHelper.getData(key: 'driverPhone')}',
     }).then((value) {
-      driverModel = GetDriverModel.fromJson(value.data);
+       driverModel = GetDriverModel.fromJson(value.data);
       print('data driver : ${driverModel!.user!.name}');
       getChairData(int.parse('${driverModel!.car!.id}'));
-      getCarTripsData(int.parse('${driverModel!.car!.id}')); 
+      getCarTripsData(int.parse('${driverModel!.car!.id}'));
+      getDriverRoleData(driver_code: '${driverModel!.driverCode}');
       emit(DriverSuccessDriverDataState(driverModel!));
     }).catchError((error) {
       print(error.toString());
@@ -101,6 +103,7 @@ class DriverCubit extends Cubit<DriverStates> {
     DioHelper.getData(url: GETCHAIR, query: {
       'id':carid,
     }).then((value) {
+      chair.clear();
       //chairModel = GetChair.fromJson(value.data);
       for (var item in value.data) {
       //print(item['id']);
@@ -108,7 +111,7 @@ class DriverCubit extends Cubit<DriverStates> {
      chair.add(item);
     }
       GetChair stm1 =  GetChair.fromJson(chair[5]);
-      //print(chairModel!.chairNumber);
+      print(chair);
      // print(chairModel!.status);
       emit(DriverSuccessChairDataState(chairModel!));
     }).catchError((error) {
@@ -181,6 +184,25 @@ class DriverCubit extends Cubit<DriverStates> {
     });
   }
 
+
+  DriversRoleModel? driversRoleModel;
+  void getDriverRoleData(
+      {
+        required String driver_code
+      }
+      ) {
+    emit(DriverLoadingDriverRoleState());
+    DioHelper.getData(url: DRIVERSROLE, query: {
+      'driver_code': driver_code
+    }).then((value) {
+      driversRoleModel = DriversRoleModel.fromJson(value.data);
+      print('driver role : ${driversRoleModel!.role}');
+      emit(DriverSuccessDriverRoleState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(DriverErrorDriverRoleState());
+    });
+  }
 
 }
 

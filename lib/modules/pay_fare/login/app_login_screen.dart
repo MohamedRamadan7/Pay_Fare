@@ -18,162 +18,163 @@ class AppLoginScreen extends StatelessWidget {
   var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => AppLoginCubit(),
-      child: BlocConsumer<AppLoginCubit, AppLoginStates>(
-        listener: (context, state) {
-          if (state is AppLoginSuccessState) {
-            if (state.loginModel.user!.type!.id == 3) {
-              print(state.loginModel.user!.name);
-              print(state.loginModel.user!.phone);
-              CacheHelper.saveData(key: 'clientId', value: state.loginModel.user!.id).then((value) {
-                clientId = CacheHelper.getData(key: 'clientId');
+    return BlocConsumer<AppLoginCubit, AppLoginStates>(
+      listener: (context, state) {
+        if (state is AppLoginSuccessState) {
+          if (state.loginModel.user!.type!.id == 3) {
+            print(state.loginModel.user!.name);
+            print(state.loginModel.user!.phone);
+            CacheHelper.saveData(key: 'clientId', value: state.loginModel.user!.id).then((value) {
+              print(CacheHelper.getData(key: 'clientId'));
+              clientId = CacheHelper.getData(key: 'clientId');
                 navigateAndFinish(context, AppLayout());
 
-              });
-            } else if (state.loginModel.user!.type!.id == 2) {
-              //print(state.loginModel.user!.name);
-              //  print(state.loginModel.user!.phone);
-               CacheHelper.saveData(key: 'driverPhone', value: state.loginModel.user!.phone).then((value) {
-                 DriverPhone = CacheHelper.getData(key: 'driverPhone');
-                     navigateAndFinish(context, DriverLayout());
+            });
+            print(CacheHelper.getData(key: 'clientId'));
 
-                });
-            } else if (state.loginModel.user!.type!.id == 1) {
-              CacheHelper.saveData(key: 'adminId', value: state.loginModel.id).then((value) {
-                AdminId = CacheHelper.getData(key: 'adminId');
-                navigateAndFinish(context, AdminLayout());
+          } else if (state.loginModel.user!.type!.id == 2) {;
+             CacheHelper.saveData(key: 'driverPhone', value: state.loginModel.user!.phone).then((value) {
+               CacheHelper.getData(key: 'driverPhone');
+               print('login${CacheHelper.getData(key: 'driverPhone')}');
+               DriverPhone = CacheHelper.getData(key: 'driverPhone');
+                   navigateAndFinish(context, DriverLayout());
 
               });
+             print('login out then${CacheHelper.getData(key: 'driverPhone')}');
+          } else if (state.loginModel.user!.type!.id == 1) {
+            CacheHelper.saveData(key: 'adminId', value: state.loginModel.id).then((value) {
+              AdminId = CacheHelper.getData(key: 'adminId');
               navigateAndFinish(context, AdminLayout());
-            } else {
-              print(state.loginModel.user!.id);
-              showToast(text: "error", state: ToastStates.ERROR);
-            }
-          } else if (state is AppLoginErrorState) {
-            showToast(text: "error", state: ToastStates.ERROR);
+
+
+            });
+            navigateAndFinish(context, AdminLayout());
+          } else {
+            print(state.loginModel.user!.id);
+            showToast(text: "Invalid email or password", state: ToastStates.ERROR);
           }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            body: SingleChildScrollView(
-              child: Form(
-                key: formkey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
+        } else if (state is AppLoginErrorState) {
+          showToast(text: "Invalid email or password", state: ToastStates.ERROR);
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Form(
+              key: formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        height: 235,
+                        width: double.infinity,
+                        decoration: BoxDecoration(color: Colors.blue),
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(50.0),
+                        child: Image.asset('assets/images/login.png'),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 235,
-                          width: double.infinity,
-                          decoration: BoxDecoration(color: Colors.blue),
+                        Text(
+                          'LOGIN',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(color: Colors.black),
                         ),
                         SizedBox(
                           height: 50.0,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(50.0),
-                          child: Image.asset('assets/images/login.png'),
+                        defaultFormFiled(
+                          controller: phoneController,
+                          type: TextInputType.phone,
+                          validation: (String value) {
+                            if (value.isEmpty) {
+                              return ' Enter your Phone';
+                            }
+                          },
+                          lable: 'Phone number',
+                          fixIcon: Icons.phone,
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'LOGIN',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline4!
-                                .copyWith(color: Colors.black),
-                          ),
-                          SizedBox(
-                            height: 50.0,
-                          ),
-                          defaultFormFiled(
-                            controller: phoneController,
-                            type: TextInputType.phone,
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        defaultFormFiled(
+                            controller: passwordController,
+                            type: TextInputType.visiblePassword,
                             validation: (String value) {
                               if (value.isEmpty) {
-                                return ' Enter your Phone';
+                                return 'Password is too short';
                               }
                             },
-                            lable: 'Phone number',
-                            fixIcon: Icons.phone,
-                          ),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          defaultFormFiled(
-                              controller: passwordController,
-                              type: TextInputType.visiblePassword,
-                              validation: (String value) {
-                                if (value.isEmpty) {
-                                  return 'Password is too short';
-                                }
-                              },
-                              lable: 'Password',
-                              fixIcon: Icons.lock,
-                              suffix: AppLoginCubit.get(context).suffix,
-                              ispassword: AppLoginCubit.get(context).isPassword,
-                              sufixpressd: () {
-                                AppLoginCubit.get(context)
-                                    .ChangePasswordVisibility();
-                              },
-                              onsumit: (value) {
-                                if (formkey.currentState!.validate()) {
-                                  AppLoginCubit.get(context).userLogin(
-                                      phone: phoneController.text,
-                                      password: passwordController.text);
-                                  print('phone ${phoneController.text}');
-                                  print('password ${passwordController.text}');
-                                }
-                              }),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          state is! AppLoginLoadingState
-                              ? defaultButton(
-                                  function: () {
-                                    if (formkey.currentState!.validate()) {
-                                      AppLoginCubit.get(context).userLogin(
-                                          phone: phoneController.text,
-                                          password: passwordController.text);
-                                      print('phone ${phoneController.text}');
-                                      print('password ${passwordController.text}');
+                            lable: 'Password',
+                            fixIcon: Icons.lock,
+                            suffix: AppLoginCubit.get(context).suffix,
+                            ispassword: AppLoginCubit.get(context).isPassword,
+                            sufixpressd: () {
+                              AppLoginCubit.get(context)
+                                  .ChangePasswordVisibility();
+                            },
+                            onsumit: (value) {
+                              if (formkey.currentState!.validate()) {
+                                AppLoginCubit.get(context).userLogin(
+                                    phone: phoneController.text,
+                                    password: passwordController.text);
+                                print('phone ${phoneController.text}');
+                                print('password ${passwordController.text}');
+                              }
+                            }),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        state is! AppLoginLoadingState
+                            ? defaultButton(
+                                function: () {
+                                  if (formkey.currentState!.validate()) {
+                                    AppLoginCubit.get(context).userLogin(
+                                        phone: phoneController.text,
+                                        password: passwordController.text);
+                                    print('phone ${phoneController.text}');
+                                    print('password ${passwordController.text}');
 
-
-                                    }
-                                    // navigateAndFinish(context,AdminLayout());
-                                  },
-                                  text: 'login',
-                                  isUberCase: true)
-                              : Center(child: CircularProgressIndicator()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Don \'t have account?'),
-                              TextButton(
-                                onPressed: () {
-                                  navigateTo(context, AppRegisterScreen());
+                                  }
+                                  // navigateAndFinish(context,AdminLayout());
                                 },
-                                child: Text('REGISTER'),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                                text: 'login',
+                                isUberCase: true)
+                            : Center(child: CircularProgressIndicator()),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Don \'t have account?'),
+                            TextButton(
+                              onPressed: () {
+                                navigateTo(context, AppRegisterScreen());
+                              },
+                              child: Text('REGISTER'),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

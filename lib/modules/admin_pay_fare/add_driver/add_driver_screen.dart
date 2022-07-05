@@ -101,11 +101,11 @@ class AdminAddDriverScreen extends StatelessWidget {
                           alignedDropdown: true,
                           child: DropdownButton<String>(
                               isExpanded: true,
-                              hint: Text('Owner'),
+                              hint: Text('owner'),
                               iconSize: 36,
                               value: AdminCubit.get(context).valueOwner,
                               items: AdminCubit.get(context).owner.map(buildMenuItem).toList(),
-                              onChanged: (value)=>AdminCubit.get(context).onChangedDropdownMenuStation(value)
+                              onChanged: (value)=>AdminCubit.get(context).onChangedDropdownMenuOwner(value)
                           ),
                         ),
                       ),
@@ -218,7 +218,7 @@ class AdminAddDriverScreen extends StatelessWidget {
                       height: 20.0,
                     ),
                     Center(
-                      child: defaultButton(
+                      child: state is !AdminPostDriverLoadingState ? defaultButton(
                           width: 200,
                           function: ()
                           {
@@ -243,7 +243,7 @@ class AdminAddDriverScreen extends StatelessWidget {
 
                           text: 'Save',
                           isUberCase: false
-                      ),
+                      ):Center(child: CircularProgressIndicator()),
 
                     )
 

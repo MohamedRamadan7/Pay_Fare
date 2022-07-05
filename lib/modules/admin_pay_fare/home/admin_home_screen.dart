@@ -49,7 +49,7 @@ class AdminHomeScreen extends StatelessWidget {
                   numberDrivers> 0? ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => bildChatItem(context,index),
+                      itemBuilder: (context, index) => buildChatItem(context,index),
                       separatorBuilder: (context, index) =>SizedBox(
                         height: 20,
                       ),
@@ -71,7 +71,7 @@ class AdminHomeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20,),
                   Center(
-                    child: defaultButton(
+                    child: state is !AdminLoadingDriversOnlineState ?defaultButton(
                       width: 150,
                         fontColor: Colors.white,
                         background: defaultColor,
@@ -79,11 +79,11 @@ class AdminHomeScreen extends StatelessWidget {
                         {
                          AdminCubit.get(context).RemoveFromQueue(adminId: CacheHelper.getData(key: 'adminId'));
                         // AdminCubit.get(context).PutDriverStatus(id: int.parse('${AdminCubit.get(context).DriversID[0]}'), value: 0);
-                        // AdminCubit.get(context).getDriversOnline();
+                         AdminCubit.get(context).getAllQueueData();
 
                         },
                         text: 'Remove',
-                    ),
+                    ):Center(child: CircularProgressIndicator()),
                   )
                 ],
               ),
@@ -142,7 +142,7 @@ class AdminHomeScreen extends StatelessWidget {
     ),
   );
 
-  Widget bildChatItem(context,index) => Padding(
+  Widget buildChatItem(context,index) => Padding(
     padding: const EdgeInsets.symmetric(horizontal:10.0),
     child: Row(
       children: [
@@ -194,30 +194,7 @@ class AdminHomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 20,)
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: Text(
-              //         'hello my name is mohamed',
-              //         maxLines: 2,
-              //         overflow: TextOverflow.ellipsis,
-              //       ),
-              //     ),
-              //     Padding(
-              //       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //       child: Container(
-              //         width: 7.0,
-              //         height: 7.0,
-              //         decoration: BoxDecoration(
-              //           color: Colors.blue,
-              //           shape: BoxShape.circle,
-              //         ),
-              //       ),
-              //     ),
-              //     Text(
-              //         '02:00pm'),
-              //   ],
-              // )
+
 
             ],
           ),

@@ -43,6 +43,8 @@ class AdminErrorTrafficState extends AdminStates {}
 class changePriceState extends AdminStates{}
 
 
+class AdminPostDriverLoadingState extends AdminStates{}
+
 class AdminPostDriverSuccessState extends AdminStates {
   final PostDriver postDriverModel;
 
@@ -93,6 +95,7 @@ class AdminSuccessRemoveFromQueueState extends AdminStates{}
 
 class AdminErrorRemoveFromQueueState extends AdminStates{}
 
+class AdminLoadingDriversOnlineState extends AdminStates {}
 class AdminSuccessDriversOnlineState extends AdminStates {
   final DriversOnlineModel driversOnlineModel;
 

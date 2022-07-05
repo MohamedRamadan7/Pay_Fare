@@ -27,6 +27,9 @@ class DriverLayout extends StatelessWidget {
             onTap:(index)
             {
               cubit.changeBottomNave(index);
+              cubit.getDriverData();
+              DriverCubit.get(context).getChairData(int.parse('${DriverCubit.get(context).driverModel!.car!.id}'));
+
             },
             items: [
               BottomNavigationBarItem(
